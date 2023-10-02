@@ -8,20 +8,20 @@ $overlay: mix($dark-grey, white, 95%);
 $overlay-light: mix($dark-grey, white, 86%);
 
 html, body, input, textarea, select, button {   
-  color: $high-emph !important;
-  background-color: $dark-grey !important;
+  color: $high-emph;
+  background-color: $dark-grey;
 }
 
 a {
-    color: rgb(75, 186, 255) !important;
+    color: rgb(75, 186, 255);
 }
 
 a:hover {
-    color:$high-emph !important;
+    color:$high-emph;
 }
 
 .site-title, .site-title:visited, .site-nav, .page-link {
-    color: $high-emph !important;
+    color: $high-emph;
 }
 
 .site-nav {
@@ -52,13 +52,13 @@ pre, code {
 }
 
 .btn {
-    background-color: $overlay !important;
-    color: $high-emph !important;
-    border-color: $overlay-light !important;
+    background-color: $overlay;
+    color: $high-emph;
+    border-color: $overlay-light;
 }
 
 .btn:hover {
-    background-color: $dark-grey !important;
+    background-color: $dark-grey;
 }
 
 table th{
@@ -74,7 +74,7 @@ table td{
 }
 
 .flash {
-    color: $dark-grey !important;
+    color: $dark-grey;
     filter: brightness(80%);
 }
 
@@ -83,24 +83,24 @@ canvas {
 }
 
 .post-list > li > div {
-    box-shadow: none !important;
+    box-shadow: none;
     background-color: $overlay;
-    border: none !important;
+    border: none;
 }
 
 li .post-meta-description {
-    color: $med-emph !important;
+    color: $med-emph;
 }
 
 .search-result-preview{
-    color: lightgray !important; 
+    color: lightgray; 
 }
 
 .search-result-highlight {
-    color:yellow !important;
-    font-weight:bold !important;
+    color:yellow;
+    font-weight:bold;
 }
 
 .search-results-list-item .search-result-title {
-    color: cornflowerblue !important;
+    color: cornflowerblue;
 }
