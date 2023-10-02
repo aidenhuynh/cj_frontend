@@ -3,25 +3,60 @@
 @import "minima/Nighthawkpages-styles";   
 
 /*-----------------------------------*/
-/*--- CUSTOM STYLES FOR Nighthawkpages ---*/
-// Uncomment out the following themes to use them 
-
-// @import "minima/hacker/jekyll-theme-hacker"; //Hacker theme 
-// @import "minima/minimal-mistakes"; //Minimal Mistakes theme 
-// @import "minima/monophase/main"; //Monophase theme 
-// @import "minima/leaf/_leaf";  //Leaf theme 
-// @import "minima/hamilton/main"; //Hamilton theme
-
-/*-----------------------------------*/
 /*----- ADD YOUR STYLES BELOW -------*/
+  
+.header {
+    overflow: hidden;
+    background-color: #1DB954;
+    padding: 20px 10px;
+}
+  
+.header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+}
+  
+.header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color:black
+}
+  
+.header a:hover {
+    background-color: #137547;
+    color: black;
+}
+  
+.header a.active {
+    background-color: #137547;
+    color: black;
+}
+  
+.header-right {
+    float: right;
+}
+  
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+        color: black;
+
+    }
+        
+    .header-right {
+        float: none;
+    }
+}
 
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
 // If you want to use dark themes uncomment out the following lines
 @import "minima/Nighthawkpages-dracula-highlight"; 
 @import "minima/Dark_Mode"; // Dracula Highlight recommended for dark mode
-
-// FOR HAMILTON
-// @import "minima/hamilton/skins/daylight";
-// @import "minima/hamilton/skins/midnight";
-// @import "minima/hamilton/skins/sunrise";
-// @import "minima/hamilton/skins/sunset"
