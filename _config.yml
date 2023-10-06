@@ -4,7 +4,7 @@ owner_name: Tirth Thakkar
 github_username: aidenhuynh
 github_repo: "cj_frontend"
 baseurl: "/cj_frontend"
-theme: jekyll-theme-yat
+remote_theme: jekyll/minima
 minima:
   social_links:
     - { platform: github, user_url: "https://github.com/aidenhuynh"}
