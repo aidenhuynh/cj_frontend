@@ -1,9 +1,22 @@
 ---
 layout: categories
-permalink: /sign-in/
-title: Sign-In
+permalink: /SignUp/
+title: Sign-Up
 search_exclude: true
 ---
+<style>
+    .form-box div{
+        text-align: center;
+    }
+    .inputbox{
+        margin-top: 2%;
+    }
+    .inputbox input{
+        
+    }
+</style>
+
+
 <html lang="en">
     <head>
         <link rel="stylesheet" href="assets/sign-in/styles.css">
@@ -16,22 +29,15 @@ search_exclude: true
                     <form action="">
                         <h2>Login</h2>
                         <div class="inputbox">
-                            <input type="email" required>
-                            <label for="">Email</label>
+                            <input type="email" placeholder="EMAIL" required>
                         </div>
                         <div class="inputbox">
-                            <input type="password" required>
-                            <label for="">Password</label>
+                            <input type="password" placeholder="PASSWORD" required>
                         </div>
-                        <div class="forget">
-                            <label for=""><input type="checkbox">Remember Me</label>
-                            <a href="#">Forgot Password</a>
-                        </div>
-                        <button>Log In</button>
+                        <button style="margin-top: 2%;">Log In</button>
                     </form>
                 </div>
             </div>
         </section>
     </body>
 </html>
-<!-- insert sign in html -->
