@@ -1,19 +1,21 @@
 /*-----------------------------------*/
 /*--- IMPORT STYLES FOR Mortpages ---*/
-@import "minima/Nighthawkpages-styles";   
+//@import "minima/Nighthawkpages-styles";   
 
 /*-----------------------------------*/
 /*----- ADD YOUR STYLES BELOW -------*/
   
+// Header
+
 .header {
     overflow: hidden;
-    background-color: #1DB954;
+    background-color: black;
     padding: 20px 10px;
 }
   
 .header a {
     float: left;
-    color: black;
+    color: #924bee;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -25,17 +27,17 @@
 .header a.logo {
     font-size: 25px;
     font-weight: bold;
-    color:black
+    color:#924bee;
 }
   
 .header a:hover {
-    background-color: #137547;
-    color: black;
+    background-color: black;
+    color: #924bee;
 }
   
 .header a.active {
-    background-color: #137547;
-    color: black;
+    background-color: black;
+    color: #924bee;
 }
   
 .header-right {
@@ -48,9 +50,8 @@
         display: block;
         text-align: left;
         color: black;
-
     }
-        
+
     .header-right {
         float: none;
     }
@@ -58,5 +59,5 @@
 
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
 // If you want to use dark themes uncomment out the following lines
-@import "minima/Nighthawkpages-dracula-highlight"; 
-@import "minima/Dark_Mode"; // Dracula Highlight recommended for dark mode
+//@import "minima/Nighthawkpages-dracula-highlight"; 
+//@import "minima/Dark_Mode"; // Dracula Highlight recommended for dark mode

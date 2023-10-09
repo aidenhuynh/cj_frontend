@@ -1,6 +1,4 @@
 ---
-layout: categories
+layout: home
 search_exclude: true
 ---
-
-\insert homepage here/
