@@ -1,0 +1,145 @@
+div.main {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 1px black solid
+}
+
+div.player {
+    display: flex;
+    flex-direction: column;
+    flex: 65;
+}
+
+div.songMetaData {
+    display: flex;
+    flex: 3;
+    background-color: black;
+    background-image: none;
+}
+
+div.mediaControls {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(24, 24, 24);
+    flex: 1;
+}
+
+div.mediaControls .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.buttons img {
+    height:50%;
+    width:auto;
+    margin: 0 .5em 0 .5em;
+}
+
+div.mediaControls .scrubber {
+    display: flex;
+}
+
+div.mediaControls .search {
+    display: flex;
+}
+
+div.playlist {
+    display: flex;
+    background-color: rgb(16, 18, 19);
+    flex: 35;
+    border-left: solid 1px black;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    scrollbar-width: thin
+}
+
+div.playlist .playlistItem {
+    background-color: rgb(16, 18, 19);
+    display: flex;
+    flex-direction: row;
+    height: 3em;
+    align-items: center;
+    min-height: 3em;
+}
+
+div.playlist .playlistItem:hover {
+    background-color: rgb(64, 63, 63);
+    transition: background-color .1s
+}
+
+div.playlist .playlistItem:not(:hover) {
+    background-color: rgb(16, 18, 19);
+    transition: background-color .1s
+}
+
+div.playlist .numDiv {
+    flex: 2;
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-family: "Trebuchet MS";
+}
+
+div.playlist .coverDiv {
+    flex: 2;
+    margin: auto;
+    align-items: center;
+}
+
+div.playlist .coverDiv img {
+    vertical-align: middle;
+    align-items: center;
+}
+
+div.playlist .songDiv {
+    margin-left: 0.6em;
+    flex: 12;
+}
+
+div.playlist .songDiv h1 {
+    font-size: 1em;
+    margin-bottom: .2em;
+    color: white;
+    font-family: "Trebuchet MS";
+    margin-top: 0;
+}
+
+div.playlist .songDiv h2 {
+    font-size: .75em;
+    margin-bottom: 0;
+    color: rgb(160, 160, 160);
+    font-family: "Trebuchet MS";
+    margin-top: 0;
+}
+
+div.playlist .delete {
+    text-align: center;
+    flex: 1;
+    font-size: .5em;
+    margin-right: 2em;
+}
+
+div.playlist .delete:hover {
+    cursor: pointer;
+    color:rgb(209, 209, 209);
+    transition: color .1s
+}
+
+div.playlist .delete:not(:hover) {
+    color: rgb(160, 160, 160);
+    transition: color .1s
+}
+
+div.background {
+    backdrop-filter: blur(10px);
+    background-image: src();
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
