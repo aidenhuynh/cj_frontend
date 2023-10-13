@@ -23,7 +23,12 @@
     line-height: 25px;
     border-radius: 4px;
 }
-  
+
+.header:hover a:hover {
+    background-color: #df7bda;
+    color: purple;
+}
+
 .header a.logo {
     font-size: 25px;
     font-weight: bold;
