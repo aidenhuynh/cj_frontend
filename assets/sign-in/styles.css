@@ -1,3 +1,59 @@
-h1 {
-    
+div {
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 3%;
+    padding: 20px;
+    background-color: #212121;
+    border-radius: 30px;
+}
+
+.container h2 {
+    margin: 0;
+    padding: 10px;
+    color: white;
+}
+
+.container p {
+    color: white;
+}
+
+.input-group {
+    /*margin: 15px 0;*/
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 80%;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.input-group input[type="submit"] {
+    background-color: #924bee;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.input-group input[type="submit"]:hover {
+    background-color: #df7bda;
+}
+
+body {
+    background-image: url('../../images/purple-polygon.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
