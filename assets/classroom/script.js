@@ -227,13 +227,16 @@ function skip() {
     console.log("skip lol")
     changePlayback("next", "POST")
     if (playing == false){
-        changePlayback("pause", "PUT");
+        changePlayback("pause", "PUT")
     }
 }
 
 function back() {
     console.log("coding!")
     changePlayback("previous", "POST")
+    if (playing == false){
+        changePlayback("pause", "PUT")
+    }
 }
 
 function mute() {
