@@ -9,13 +9,22 @@
         </div>
         <div class="mediaControls">
             <div class="buttons">
-                <img id="back" src="">
-                <img id="play" src="">
-                <img id="skip" src="">
+                <img id="shuffle" src="{{site.baseurl}}/images/classroom/shuffle-inactive.png" onclick="shuffle()">
+                <img id="back" src="{{site.baseurl}}/images/classroom/back.png" onclick="back()">
+                <img class="play" id="play" src="{{site.baseurl}}/images/classroom/play.png" onclick="play()">
+                <img id="skip" src="{{site.baseurl}}/images/classroom/skip.png" onclick="skip()">
+                <img id="loop" src="{{site.baseurl}}/images/classroom/loop-inactive.png" onclick="loop()">
             </div>
             <div class="scrubber">
+                <span id="current">0:00</span>
+                <input id="progress-bar" type="range">
+                <span id="length">3:00</span>
             </div>
             <div class="search">
+                <input id="search" type="text" placeholder="Search song title here...">
+                <img class="search-icon" src="{{site.baseurl}}/images/classroom/search.png">
+                <img class="volume-icon" src="{{site.baseurl}}/images/classroom/volume-mid.png" id="volume-icon">
+                <input id="volume-bar" type="range">
             </div>
         </div>
     </div>
@@ -32,4 +41,7 @@
 <input id="coverInput" placeholder="Enter song cover img url">
 <br>
 <button onclick="addSong()">add song</button>
-
+<br>\
+<input id="lengthInput" placeholder="Enter a song length (00:00)">
+<br>
+<button onclick="setLength(document.getElementById('lengthInput').value)">change length</button>

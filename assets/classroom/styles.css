@@ -4,7 +4,11 @@ div.main {
     width: auto;
     height: auto;
     aspect-ratio: 16 / 9;
-    border: 1px black solid
+    border: 1px black solid;
+    color: white;
+    font-family: "Trebuchet MS";
+    font-weight: normal;
+    letter-spacing: 0;
 }
 
 div.player {
@@ -15,7 +19,7 @@ div.player {
 
 div.songMetaData {
     display: flex;
-    flex: 3;
+    flex: 5;
     background-color: black;
     background-image: none;
 }
@@ -24,27 +28,126 @@ div.mediaControls {
     display: flex;
     flex-direction: column;
     background-color: rgb(24, 24, 24);
-    flex: 1;
+    flex: 2;
 }
 
 div.mediaControls .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: red; */
+    background-color: rgb(24, 24, 24);
+    flex: 4;
 }
 
 div.buttons img {
-    height:50%;
+    margin: 0 1em 0 1em;
+    height: 1.5em;
     width:auto;
-    margin: 0 .5em 0 .5em;
+}
+
+div.buttons img:hover {
+    filter: brightness(120%);
+    transition: background-color .1s;
+    cursor: pointer;
+}
+
+div.buttons img:not(:hover) {
+    filter: brightness(100%);
+    transition: filter .1s
+}
+
+div.buttons .play {
+    height: 2.5em;
+    width:auto;
 }
 
 div.mediaControls .scrubber {
     display: flex;
+    /* background-color: blue; */
+    background-color: rgb(24, 24, 24);
+    flex: 2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2em 0 2em
+}
+
+input[type=range] {
+    appearance: none;
+    margin: auto;
+    border: 0;
+    border-radius: 1em;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+    appearance: none;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+div.mediaControls .scrubber input[type=range] {
+    width: 85%;
+    height: 20%;
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 50%, #4D4D4D 50%, #4D4D4D 100%);
+}
+
+div.mediaControls .scrubber input[type=range]:hover {
+    background: linear-gradient(to right, #924BEE 0%, #924BEE 50%, #4D4D4D 50%, #4D4D4D 100%);    
 }
 
 div.mediaControls .search {
     display: flex;
+    /* background-color: green; */
+    background-color: rgb(24, 24, 24);
+    flex: 4;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 2em 0 2em
+}
+
+div.mediaControls .search .search-icon {
+    width: 1.5em;
+    height: auto;
+    margin: auto;
+    margin-right: 1em;
+}
+
+div.mediaControls .search .volume-icon {
+    width: 1.8em;
+    height: auto;
+    margin: auto;
+    margin-left: 1em;
+}
+
+div.mediaControls .search input[type=text] {
+    border-radius: .4em;
+    height: 50%;
+    width: 60%;
+    border: 0;
+    padding: 1em;
+}
+
+div.mediaControls .search input::placeholder {
+    font-style: italic;
+}
+
+div.mediaControls .search input[type=range] {
+    width: 20%;
+    height: 10%;
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 50%, #4D4D4D 50%, #4D4D4D 100%);    
+}
+
+div.mediaControls .search input[type=range]:hover {
+    background: linear-gradient(to right, #924BEE 0%, #924BEE 50%, #4D4D4D 50%, #4D4D4D 100%);    
 }
 
 div.playlist {
@@ -68,7 +171,7 @@ div.playlist .playlistItem {
 }
 
 div.playlist .playlistItem:hover {
-    background-color: rgb(64, 63, 63);
+    background-color: rgb(63, 63, 63);
     transition: background-color .1s
 }
 
@@ -81,8 +184,7 @@ div.playlist .numDiv {
     flex: 2;
     text-align: center;
     margin: auto;
-    color: white;
-    font-family: "Trebuchet MS";
+    letter-spacing: 0;
 }
 
 div.playlist .coverDiv {
@@ -104,17 +206,18 @@ div.playlist .songDiv {
 div.playlist .songDiv h1 {
     font-size: 1em;
     margin-bottom: .2em;
-    color: white;
-    font-family: "Trebuchet MS";
+    letter-spacing: 0;
     margin-top: 0;
+    font-weight: normal;
 }
 
 div.playlist .songDiv h2 {
     font-size: .75em;
     margin-bottom: 0;
     color: rgb(160, 160, 160);
-    font-family: "Trebuchet MS";
+    letter-spacing: 0;
     margin-top: 0;
+    font-weight: normal;
 }
 
 div.playlist .delete {

@@ -1,3 +1,7 @@
+var playing = false
+var looping = false
+var shuffling = false
+const url = "images/classroom/"
 var playlist = [
     {
         title: "Sneaky Snitch",
@@ -7,7 +11,7 @@ var playlist = [
     {
         title: "Cipher",
         artist: "Kevin MacLeod",
-        cover: "https://i.scdn.co/image/ab67616d0000b27331dd4699f0ba3a18851f0092",
+        cover: "https://cdns-images.dzcdn.net/images/cover/6bed681d3fd25550ef733dfbcf3cd67e/350x350.jpg",
     },
     {
         title: "Fluffing a Duck",
@@ -41,11 +45,14 @@ function changeBG() {
 }
 
 function lengthCheck(data) {
-    if (data.length <= 18) {
+    // set to whatever lol
+    const maxLength = 24
+
+    if (data.length <= maxLength) {
         return data
     }
 
-    data = data.slice(0, 18)
+    data = data.slice(0, maxLength)
 
     const characters = [
         " ", "/", ".", ",", "-",
@@ -53,7 +60,7 @@ function lengthCheck(data) {
         "*", "&", "^", '"', "'",
         ";", ":", "%", "$", "#",
         "@", "!", "[", "]", "{",
-        "}", "<", ">", "`", "~"
+        "}", "<", ">", "'", "~"
     ]
 
     const loops = data.length - 1
@@ -61,7 +68,6 @@ function lengthCheck(data) {
     for (let i = loops; i > 0; i --) {
         if (characters.includes(data[i])) {
             data = data.slice(0, i)
-            console.log("true")
         }
         
         else {
@@ -158,3 +164,148 @@ function addSong() {
 function setSong() {
     document.getElementsByClassName('background')[0].style.backgroundImage.src = playlist[0][cover]
 }
+
+function setLength(length) {
+    const progressBar = document.getElementById("progress-bar")
+
+    progressBar.value = 0
+    document.getElementById('current').innerHTML = "0:00"
+    document.getElementById('length').innerHTML = length
+
+    progressBar.dispatchEvent(new Event('input'))
+}
+
+function play() {
+    const playIcon = document.getElementById('play')
+
+    if (playing == false) {
+        playIcon.src = url + "pause.png"
+        playing = true
+    }
+
+    else {
+        playIcon.src = url + "play.png"
+        playing = false
+    }
+}
+
+function shuffle() {
+    const shuffleIcon = document.getElementById('shuffle')
+
+    if (shuffling == false) {
+        shuffleIcon.src = url + "shuffle-active.png"
+        shuffling = true
+    }
+
+    else {
+        shuffleIcon.src = url + "shuffle-inactive.png"
+        shuffling = false
+    }
+}
+
+function loop() {
+    const loopIcon = document.getElementById('loop')
+
+    if (looping == false) {
+        loopIcon.src = url + "loop-active.png"
+        looping = true
+    }
+
+    else {
+        loopIcon.src = url + "loop-inactive.png"
+        looping = false
+    }
+}
+
+function skip() {
+    console.log("skip lol")
+}
+
+function back() {
+    console.log("coding!")
+}
+
+function dynamicBars() {
+    const bars = {
+        volumeBar:document.getElementById('volume-bar'),
+        progressBar:document.getElementById('progress-bar')
+    }
+    const volumeIcon = document.getElementById('volume-icon')
+
+    for (const barKey in bars) {
+        const barValue = bars[barKey]
+
+        barValue.addEventListener('mouseenter', function() {
+            const percent = barValue.value/100
+            const bg = `linear-gradient(to right, #924BEE 0%, #924BEE ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
+            barValue.style.background = bg
+        })
+    
+        barValue.addEventListener('mouseleave', function() {
+            const percent = barValue.value/100
+            const bg = `linear-gradient(to right, #ffffff 0%, #ffffff ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
+            barValue.style.background = bg
+        })
+
+        barValue.addEventListener('input', function() {
+            const percent = barValue.value/100
+            const bg = `linear-gradient(to right, #924BEE 0%, #924BEE ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
+            barValue.style.background = bg
+        })
+
+        if (barKey == "volumeBar") {
+            barValue.addEventListener('input', function() {
+                const percent = barValue.value/100
+
+                if (percent > 2/3) {
+                    volumeIcon.src = url + "volume-high.png"
+                }
+                
+                else if (percent > 1/3) {
+                    volumeIcon.src = url + "volume-mid.png"
+                }
+        
+                else if (percent > 0) {
+                    volumeIcon.src = url + "volume-low.png"
+                }
+        
+                else {
+                    volumeIcon.src = url + "volume-muted.png"
+        
+                }
+            })
+        }
+
+        else {
+            barValue.addEventListener('input', function() {
+                const percent = barValue.value/100
+                const length = document.getElementById('length').innerHTML
+                const progress = document.getElementById('current')
+
+
+                const index = length.indexOf(":")
+                const totalSeconds = length.slice(0, index) * 60 + Number(length.slice(index + 1))
+
+                const currentTotalSeconds = Math.floor(percent * totalSeconds)
+                const currentSeconds = currentTotalSeconds % 60
+                const currentMinutes = Math.floor(currentTotalSeconds/60)
+        
+
+                if (currentSeconds < 10) {
+                    progress.innerHTML = currentMinutes + ":0" + currentSeconds
+                }
+
+                else {
+                    progress.innerHTML = currentMinutes + ":" + currentSeconds
+                }
+            })
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    dynamicBars()
+    setLength("4:00")
+})
+
+    
