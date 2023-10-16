@@ -51,6 +51,12 @@ div {
     background-color: #df7bda;
 }
 
+hr {
+    margin: auto;
+    margin-top: 30px;
+    width: 75%;
+}
+
 body {
     background-image: url('../../images/purple-bg.jpeg');
     background-repeat: no-repeat;
