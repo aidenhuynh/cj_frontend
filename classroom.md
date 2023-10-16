@@ -24,7 +24,7 @@
                 <input id="search" type="text" placeholder="Search song title here...">
                 <img class="search-icon" src="{{site.baseurl}}/images/classroom/search.png">
                 <img class="volume-icon" src="{{site.baseurl}}/images/classroom/volume-mid.png" id="volume-icon">
-                <input id="volume-bar" type="range">
+                <input id="volume-bar" type="range" max="100">
             </div>
         </div>
     </div>

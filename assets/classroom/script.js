@@ -167,7 +167,8 @@ function setSong() {
 
 function setLength(length) {
     const progressBar = document.getElementById("progress-bar")
-
+    const index = length.indexOf(":")
+    progressBar.max = length.slice(0, index) * 60 + Number(length.slice(index + 1))
     progressBar.value = 0
     document.getElementById('current').innerHTML = "0:00"
     document.getElementById('length').innerHTML = length
@@ -236,26 +237,26 @@ function dynamicBars() {
         const barValue = bars[barKey]
 
         barValue.addEventListener('mouseenter', function() {
-            const percent = barValue.value/100
+            const percent = barValue.value/barValue.max
             const bg = `linear-gradient(to right, #924BEE 0%, #924BEE ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
             barValue.style.background = bg
         })
     
         barValue.addEventListener('mouseleave', function() {
-            const percent = barValue.value/100
+            const percent = barValue.value/barValue.max
             const bg = `linear-gradient(to right, #ffffff 0%, #ffffff ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
             barValue.style.background = bg
         })
 
         barValue.addEventListener('input', function() {
-            const percent = barValue.value/100
+            const percent = barValue.value/barValue.max
             const bg = `linear-gradient(to right, #924BEE 0%, #924BEE ${percent * 100}%, #4D4D4D ${percent * 100}%, #4D4D4D 100%)`
             barValue.style.background = bg
         })
 
         if (barKey == "volumeBar") {
             barValue.addEventListener('input', function() {
-                const percent = barValue.value/100
+                const percent = barValue.value/barValue.max
 
                 if (percent > 2/3) {
                     volumeIcon.src = url + "volume-high.png"
@@ -278,11 +279,11 @@ function dynamicBars() {
 
         else {
             barValue.addEventListener('input', function() {
-                const percent = barValue.value/100
                 const length = document.getElementById('length').innerHTML
                 const progress = document.getElementById('current')
-
-
+                const percent = barValue.value/barValue.max
+                
+                
                 const index = length.indexOf(":")
                 const totalSeconds = length.slice(0, index) * 60 + Number(length.slice(index + 1))
 
