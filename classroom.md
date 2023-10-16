@@ -45,3 +45,4 @@
 <input id="lengthInput" placeholder="Enter a song length (00:00)">
 <br>
 <button onclick="setLength(document.getElementById('lengthInput').value)">change length</button>
+
