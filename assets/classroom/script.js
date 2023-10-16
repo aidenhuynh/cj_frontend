@@ -226,6 +226,9 @@ function loop() {
 function skip() {
     console.log("skip lol")
     changePlayback("next", "POST")
+    if (playing == false){
+        changePlayback("pause", "PUT");
+    }
 }
 
 function back() {
