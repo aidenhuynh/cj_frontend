@@ -231,7 +231,6 @@ function back() {
 
 function mute() {
     const volumeBar = document.getElementById('volume-bar')
-    const volumeIcon = document.getElementById('volume-icon')
     
     if (muted == true) {
         volumeBar.value = savedVol
