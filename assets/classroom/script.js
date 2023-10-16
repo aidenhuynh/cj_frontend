@@ -1,7 +1,10 @@
+const url = "images/classroom/"
 var playing = false
 var looping = false
 var shuffling = false
-const url = "images/classroom/"
+var muted = false
+var savedVol = 0
+
 var playlist = [
     {
         title: "Sneaky Snitch",
@@ -226,11 +229,31 @@ function back() {
     console.log("coding!")
 }
 
+function mute() {
+    const volumeBar = document.getElementById('volume-bar')
+    const volumeIcon = document.getElementById('volume-icon')
+    
+    if (muted == true) {
+        volumeBar.value = savedVol
+        muted = false
+    }
+
+    else {
+        savedVol = volumeBar.value
+        volumeBar.value = 0
+        muted = true
+    }
+
+    volumeBar.dispatchEvent(new Event('input'))
+    volumeBar.dispatchEvent(new Event('mouseleave'))
+}
+
 function dynamicBars() {
     const bars = {
         volumeBar:document.getElementById('volume-bar'),
         progressBar:document.getElementById('progress-bar')
     }
+
     const volumeIcon = document.getElementById('volume-icon')
 
     for (const barKey in bars) {
@@ -291,14 +314,13 @@ function dynamicBars() {
                 const currentSeconds = currentTotalSeconds % 60
                 const currentMinutes = Math.floor(currentTotalSeconds/60)
         
+                var temp = ":"
 
                 if (currentSeconds < 10) {
-                    progress.innerHTML = currentMinutes + ":0" + currentSeconds
+                    temp = ":0"
                 }
 
-                else {
-                    progress.innerHTML = currentMinutes + ":" + currentSeconds
-                }
+                progress.innerHTML = currentMinutes + temp + currentSeconds
             })
         }
     }
@@ -306,7 +328,7 @@ function dynamicBars() {
 
 document.addEventListener('DOMContentLoaded', function() {
     dynamicBars()
-    setLength("4:00")
+    setLength("4:00")    
 })
 
     
