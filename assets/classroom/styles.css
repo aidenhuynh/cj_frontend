@@ -48,7 +48,7 @@ div.buttons img {
 
 div.buttons img:hover {
     filter: brightness(120%);
-    transition: background-color .1s;
+    transition: filter .1s;
     cursor: pointer;
 }
 
@@ -114,6 +114,17 @@ div.mediaControls .search {
     padding: 0 2em 0 2em
 }
 
+div.mediaControls .search img:hover {
+    filter: brightness(120%);
+    transition: filter .1s;
+    cursor: pointer;
+}
+
+div.mediaControls .search img:not(:hover) {
+    filter: brightness(100%);
+    transition: filter .1s;
+}
+
 div.mediaControls .search .search-icon {
     width: 1.5em;
     height: auto;
@@ -148,6 +159,11 @@ div.mediaControls .search input[type=range] {
 
 div.mediaControls .search input[type=range]:hover {
     background: linear-gradient(to right, #924BEE 0%, #924BEE 50%, #4D4D4D 50%, #4D4D4D 100%);    
+}
+
+div.mediaControls .search img:not(:hover) {
+    filter: brightness(100%);
+    transition: filter .1s;
 }
 
 div.playlist {
