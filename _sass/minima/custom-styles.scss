@@ -9,7 +9,7 @@
 
 .header {
     overflow: hidden;
-    background-color: black;
+    background-color: #212121;
     padding: 20px 10px;
 }
   
@@ -23,7 +23,12 @@
     line-height: 25px;
     border-radius: 4px;
 }
-  
+
+.header:hover a:hover {
+    background-color: #df7bda;
+    color: purple;
+}
+
 .header a.logo {
     font-size: 25px;
     font-weight: bold;
@@ -31,12 +36,12 @@
 }
   
 .header a:hover {
-    background-color: black;
+    background-color: #212121;
     color: #924bee;
 }
   
 .header a.active {
-    background-color: black;
+    background-color: #212121;
     color: #924bee;
 }
   
@@ -49,7 +54,7 @@
         float: none;
         display: block;
         text-align: left;
-        color: black;
+        color: #212121;
     }
 
     .header-right {
