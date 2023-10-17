@@ -27,7 +27,9 @@
     }
     
     const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
-    const redirectUri = 'http://127.0.0.1:4100/cj_frontend/classroom';
+    // const redirectUri = 'http://127.0.0.1:4100/classroom';
+    const redirectUri = 'http://classroomjukebox/classroom';
+
     
     let codeVerifier = generateRandomString(128);
     
