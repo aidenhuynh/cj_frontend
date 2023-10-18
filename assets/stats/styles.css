@@ -36,21 +36,6 @@ a
     font-size: 16px;
 }
 
-.input-group input[type="submit"] {
-    background-color: #924bee;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.input-group input[type="submit"]:hover {
-    background-color: #df7bda;
-}
-
 body {
     background-image: url('../../images/purple-bg-full.jpeg');
     background-repeat: no-repeat;
