@@ -360,27 +360,28 @@ fetch('https://accounts.spotify.com/api/token', {
     body: body
 })
     .then(response => {
-    if (!response.ok) {
-        throw new Error('HTTP status ' + response.status);
-    }
-    return response.json();
+        if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+        }
+        
+        return response.json();
     })
     .then(data => {
         console.log("localStorageIng")
         localStorage.setItem('access_token', data.access_token);
     })
     .catch(error => {
-    console.error('Error:', error);
+        console.error('Error:', error);
     });
 
 async function playSong() {
     var accessToken = localStorage.getItem('access_token');
 
     const response = await fetch('https://api.spotify.com/v1/me/player/queue?uri=spotify:track:4cOdK2wGLETKBW3PvgPWqT', {
-    method : "POST",
-    headers: {
-        Authorization: 'Bearer ' + accessToken
-    }
+        method : "POST",
+        headers: {
+            Authorization: 'Bearer ' + accessToken
+        }
     }).then(response => {
         if (!response.ok) {
             throw new Error('HTTP status ' + response.status);
@@ -398,10 +399,10 @@ async function playSong() {
 async function changePlayback(playback, method) {
     var accessToken = localStorage.getItem('access_token');
     const response = await fetch('https://api.spotify.com/v1/me/player/' + playback, {
-    method : method,
-    headers: {
-        Authorization: 'Bearer ' + accessToken
-    }
+        method : method,
+        headers: {
+            Authorization: 'Bearer ' + accessToken
+        }
     }).then(response => {
         if (!response.ok) {
             throw new Error('HTTP status ' + response.status);
