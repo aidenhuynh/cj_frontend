@@ -22,7 +22,7 @@ function signIn(event) {
 
     if (isAuthenticated) {
         // Redirect to the home page
-        window.location.href = '{{site.baseurl}}/';
+        window.location.href = '/';
     } else {
         // Display an error message (you can customize this based on your authentication logic)
         alert('Authentication failed. Please check your email and password.');
