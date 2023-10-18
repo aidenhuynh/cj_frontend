@@ -17,7 +17,7 @@ function updateHeader(email) {
     const headerRight = document.getElementById('headerRight');
     headerRight.innerHTML = `
         <a href="/">Home</a>
-        <a href="/Statistics/">Statistics</a>
+        <a href="/stats/">Statistics</a>
         <a href="/About">About</a>
         <span>${email}</span>
     `;
@@ -27,7 +27,7 @@ function updateHeaderSignUp() {
     const headerRight = document.getElementById('headerRight');
     headerRight.innerHTML = `
         <a href="/">Home</a>
-        <a href="/Statistics/">Statistics</a>
+        <a href="/stats/">Statistics</a>
         <a href="/About">About</a>
         <a href="/assets/sign-in/sign_in">Sign Up</a>
     `;
