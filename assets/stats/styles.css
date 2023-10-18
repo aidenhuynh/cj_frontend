@@ -54,6 +54,10 @@ body {
     border: 1px solid #ddd;
     padding: 8px;
   }
+
+  #students td {
+    background-color: white;
+  }
   
   #students tr:hover {background-color: #eee4fd;}
   
