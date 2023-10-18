@@ -7,7 +7,15 @@ function signIn(event) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Add your authentication logic here (validate email and password)
+    // authentication logic (validate email and password)
+    /*
+    if (email == (get email data) && password == (get password data)) {
+        const isAuthenticated = true;
+    }
+    else {
+        const isAuthenticated = false;
+    }
+    */
 
     // For demo purposes, let's assume successful authentication
     const isAuthenticated = true;

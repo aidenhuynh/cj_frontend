@@ -341,7 +341,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-const redirectUri = 'http://127.0.0.1:4100/cj_frontend/classroom';
+// const redirectUri = 'http://127.0.0.1:4100/classroom';
+const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
 let body = new URLSearchParams({
