@@ -1,13 +1,27 @@
 ---
-layout: categories
-permalink: /Statistics/
-title: Statistics
+layout: default
 search_exclude: true
+permalink: /stats/
 ---
-<html lang="en">
-    <head>
-        <link rel="stylesheet" href="assets/stats/styles.css">
-    </head>
-    <body>
-    </body>
-</html>
+
+<link rel="stylesheet" href="{{site.baseurl}}/assets/stats/styles.css">
+<body>
+    <div class="container">
+        <h2>See your song statistics</h2>
+        <form action="#">
+            <div class="input-group">
+                <input type="input" placeholder="Enter student name">
+            </div>
+        </form>
+        <table id = "students">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Song Code</th>
+                    <th>Time Since Upload</th>
+                    <th>Date of Upload</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
