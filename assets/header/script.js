@@ -29,6 +29,6 @@ function updateHeaderSignUp() {
         <a href="/">Home</a>
         <a href="/stats/">Statistics</a>
         <a href="/About">About</a>
-        <a href="/assets/sign-in/sign_in">Sign Up</a>
+        <a href="/sign_in">Sign Up</a>
     `;
 }
