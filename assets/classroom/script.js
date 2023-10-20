@@ -47,10 +47,7 @@ function changeBG() {
     document.getElementById('bg').src = '{{site.baseurl}}/images/stackoverflow.png'
 }
 
-function lengthCheck(data) {
-    // set to whatever lol
-    const maxLength = 24
-
+function lengthCheck(data, maxLength) {
     if (data.length <= maxLength) {
         return data
     }
@@ -110,8 +107,8 @@ function createPlaylistDiv(index) {
 
     divComponents["songDiv"].title = title + " - " + artist
 
-    title = lengthCheck(title)
-    artist = lengthCheck(artist)
+    title = lengthCheck(title, 24)
+    artist = lengthCheck(artist, 32)
 
     divComponents["numDiv"].innerHTML = count + 1
     divComponents["coverDiv"].innerHTML = "<img src='" + item["cover"] + "'>"
@@ -364,7 +361,7 @@ fetch('https://accounts.spotify.com/api/token', {
         if (!response.ok) {
             throw new Error('HTTP status ' + response.status);
         }
-        
+
         return response.json();
     })
     .then(data => {
