@@ -147,10 +147,35 @@ function removePlaylistDiv(index) {
     }
 }
 
-function addSong() {
-    const title = document.getElementById('titleInput').value
-    const artist = document.getElementById('artistInput').value
-    const cover = document.getElementById('coverInput').value
+function tempAddSong(input) {
+    const index = input.indexOf("track/")
+    const URI = input.slice(index + 6, index + 28)
+    addSong(URI)
+}
+
+function addSong(URI) {
+    const songData = spotifyAPI("tracks/" + URI, "GET")
+    const title = songData["name"]
+    const cover = songData["album"]["images"][0]["url"]
+    var artist = ""
+    console.log(songData)
+
+    const artists = songData[artists]
+    const artistCount = artists.length
+
+    if (artistCount == 0) {
+        artist = artists[0]
+    }
+
+    else {
+        for (let i = 0; i < artistCount; i ++) {
+            artist += artists[i]
+
+            if (i != artistCount - 1) {
+                artist += ", "
+            }
+        }
+    }
 
     playlist.push({
         title:title,
@@ -159,6 +184,8 @@ function addSong() {
     })
 
     createPlaylistDiv(playlist.length - 1)
+
+    spotifyAPI("me/player/queue?uri=%3Atrack%3A" + URI, "POST")
 }
 
 function setSong() {
@@ -181,13 +208,13 @@ function play() {
 
     if (playing == false) {
         playIcon.src = url + "pause.png"
-        changePlayback("play", "PUT")
+        spotifyAPI("me/player/play", "PUT")
         playing = true
     }
 
     else {
         playIcon.src = url + "play.png"
-        changePlayback("pause", "PUT")
+        spotifyAPI("me/player/pause", "PUT")
         playing = false
     }
 }
@@ -197,11 +224,13 @@ function shuffle() {
 
     if (shuffling == false) {
         shuffleIcon.src = url + "shuffle-active.png"
+        spotifyAPI("me/player/shuffle?state=true", "PUT")
         shuffling = true
     }
 
     else {
         shuffleIcon.src = url + "shuffle-inactive.png"
+        spotifyAPI("me/player/shuffle?state=false", "PUT")
         shuffling = false
     }
 }
@@ -211,26 +240,28 @@ function loop() {
 
     if (looping == false) {
         loopIcon.src = url + "loop-active.png"
+        spotifyAPI("me/player/repeat?state=track", "PUT")
         looping = true
     }
 
     else {
         loopIcon.src = url + "loop-inactive.png"
+        spotifyAPI("me/player/repeat?state=off", "PUT")
         looping = false
     }
 }
 
 function skip() {
-    changePlayback("next", "POST")
+    spotifyAPI("me/player/next", "POST")
     if (playing == false){
-        changePlayback("pause", "PUT")
+        spotifyAPI("me/player/pause", "PUT")
     }
 }
 
 function back() {
-    changePlayback("previous", "POST")
+    spotifyAPI("me/player/previous", "POST")
     if (playing == false){
-        changePlayback("pause", "PUT")
+        spotifyAPI("me/player/pause", "PUT")
     }
 }
 
@@ -338,8 +369,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-// const redirectUri = 'http://127.0.0.1:4100/classroom';
-const redirectUri = 'https://classroomjukebox.com/classroom';
+const redirectUri = 'http://127.0.0.1:4000/classroom';
+// const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
 let body = new URLSearchParams({
@@ -394,9 +425,9 @@ async function playSong() {
     });
 }
 
-async function changePlayback(playback, method) {
+async function spotifyAPI(url, method) {
     var accessToken = localStorage.getItem('access_token');
-    const response = await fetch('https://api.spotify.com/v1/me/player/' + playback, {
+    await fetch('https://api.spotify.com/v1/' + url, {
         method : method,
         headers: {
             Authorization: 'Bearer ' + accessToken
@@ -405,12 +436,12 @@ async function changePlayback(playback, method) {
         if (!response.ok) {
             throw new Error('HTTP status ' + response.status);
         }
-        return response.json();
+        return response.json()
     })
     .then(data => {
-        console.log(data)  
+        return data  
     })
     .catch(error => {
         console.error('Error:', error);
-    });
+    })
 }
