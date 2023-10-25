@@ -5,13 +5,18 @@ search_exclude: true
 
 <link rel="stylesheet" href="{{site.baseurl}}/assets/sign-in/styles.css">
 
+<head>
+    <script src="{{site.baseurl}}/assets/header/script.js"></script>
+    <script src="{{site.baseurl}}/assets/sign-in/script.js"></script>
+
+</head>
 
 <body>
     <div class="container">
         <h2>Sign In</h2>
         <p>Create personalized rooms and view song statistics</p>
 
-        <form onsubmit="signIn(event)">
+        <form onsubmit="signIn(); return false;">
             <div class="input-group">
                 <input id="email" type="email" placeholder="Email" required/>
             </div>
@@ -25,5 +30,4 @@ search_exclude: true
         </form>
 
     </div>
-    <script src="{{site.baseurl}}/assets/sign-in/script.js"></script>
 </body>
