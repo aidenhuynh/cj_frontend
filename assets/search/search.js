@@ -42,80 +42,121 @@
 
 // export default App;
 
+document.getElementById("search").onclick = function(){fetchData()}
+
+var client_id = 'a76d4532c6e14dd7bd7393e3fccc1185';
+var client_secret = '1c286b5fd76140b7a7af34792b63b424';
+
+async function getSpotifyToken() {
+    const url = 'https://accounts.spotify.com/api/token';
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic ' + (btoa(client_id + ':' + client_secret)),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials',
+        json: true
+    })
+    if (response.ok) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        return jsonResponse.access_token;
+    } else {
+        console.log(response.statusText);
+        throw new Error(`Request failed! Status code: ${response.status} ${response.statusText}`);
+    }
+}
+
+const accessToken = await getSpotifyToken()
+
+
 const resultContainer = document.getElementById("result");
 
 function fetchData() {
-  resultContainer.innerHTML = "";
-
-  const filterInput = document.getElementById("filterInput");
-  const filter = filterInput.value;
-
-  const url = "https://api.spotify.com/v1/search" + encodeURIComponent(filter);
+  const searchQuery = document.getElementById("filterInput").value; 
+  
+  // Define the Spotify API endpoint for searching tracks
+  const searchEndpoint = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`;
+  
+  // Define the headers for the request, including the access token
   const headers = {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'default',
-    credentials: 'omit',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    'Authorization': `Bearer ${accessToken}`,
   };
-
-  fetch(url, headers)
+  
+  // Make a GET request to the Spotify API
+  fetch(searchEndpoint, { headers })
     .then(response => {
-      if (response.status !== 200) {
-        const errorMsg = 'Database response error: ' + response.status;
-        console.log(errorMsg);
-        const tr = document.createElement("tr");
-        const td = document.createElement("td");
-        td.innerHTML = errorMsg;
-        tr.appendChild(td);
-        resultContainer.appendChild(tr);
-        return;
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error('Failed to fetch data');
       }
-
-      response.json().then(data => {
-        console.log(data);
-
-      for (const row of data.results) {
-          console.log(row);
-
-          const tr = document.createElement("tr");
-
-          const artist = document.createElement("td");
-          const track = document.createElement("td");
-          const image = document.createElement("td");
-          const preview = document.createElement("td");
-
-          artist.innerHTML = row.artistName;
-          track.innerHTML = row.trackName; 
-          const img = document.createElement("img");
-          img.src = row.artworkUrl100;
-          image.appendChild(img);
-
-          const audio = document.createElement("audio");
-          audio.controls = true;
-          const source = document.createElement("source");
-          source.src = row.previewUrl;
-          source.type = "audio/mp4";
-          audio.appendChild(source);
-          preview.appendChild(audio);
-
-          tr.appendChild(artist);
-          tr.appendChild(track);
-          tr.appendChild(image);
-          tr.appendChild(preview);
-
-          resultContainer.appendChild(tr);
-        }
-      })
     })
-    .catch(err => {
-      console.error(err);
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-      td.innerHTML = err;
-      tr.appendChild(td);
-      resultContainer.appendChild(tr);
+    .then(data => {
+      // Handle the data here, e.g., display the search results
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
     });
+  
+
+//   fetch(url, headers)
+//     .then(response => {
+//       if (response.status !== 200) {
+//         const errorMsg = 'Database response error: ' + response.status;
+//         console.log(errorMsg);
+//         const tr = document.createElement("tr");
+//         const td = document.createElement("td");
+//         td.innerHTML = errorMsg;
+//         tr.appendChild(td);
+//         resultContainer.appendChild(tr);
+//         return;
+//       }
+
+//       response.json().then(data => {
+//         console.log(data);
+
+//       for (const row of data.results) {
+//           console.log(row);
+
+//           const tr = document.createElement("tr");
+
+//           const artist = document.createElement("td");
+//           const track = document.createElement("td");
+//           const image = document.createElement("td");
+//           const preview = document.createElement("td");
+
+//           artist.innerHTML = row.artistName;
+//           track.innerHTML = row.trackName; 
+//           const img = document.createElement("img");
+//           img.src = row.artworkUrl100;
+//           image.appendChild(img);
+
+//           const audio = document.createElement("audio");
+//           audio.controls = true;
+//           const source = document.createElement("source");
+//           source.src = row.previewUrl;
+//           source.type = "audio/mp4";
+//           audio.appendChild(source);
+//           preview.appendChild(audio);
+
+//           tr.appendChild(artist);
+//           tr.appendChild(track);
+//           tr.appendChild(image);
+//           tr.appendChild(preview);
+
+//           resultContainer.appendChild(tr);
+//         }
+//       })
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       const tr = document.createElement("tr");
+//       const td = document.createElement("td");
+//       td.innerHTML = err;
+//       tr.appendChild(td);
+//       resultContainer.appendChild(tr);
+//     });
 }
