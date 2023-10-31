@@ -94,7 +94,7 @@ function sendMessage(message) {
 }
 
 function onMessageReceived(payload){
-    console.log(JSON.parse(payload.body).content);
+    addSong(JSON.parse(payload.body).content)
 }
 
 function changeBG() {
