@@ -21,18 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
   displayCookies(cookies);
 });
 
-function displayCookies(cookies) {
-  const cookieDisplay = document.getElementById('cookieDisplay');
-  if (cookieDisplay) {
-      const cookiesList = cookies.map(cookie => {
-          const [name, value] = cookie.split('=');
-          return `${name}: ${value}`;
-      });
-
-      cookieDisplay.innerHTML = cookiesList.join('<br>');
-  }
-}
-
 function updateHeader(email) {
   const headerRight = document.getElementById('headerRight');
   headerRight.innerHTML = `
