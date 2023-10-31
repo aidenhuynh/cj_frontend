@@ -1,3 +1,5 @@
+'use strict';
+
 const url = "images/classroom/"
 var playing = false
 var looping = false
@@ -54,6 +56,49 @@ class Track {
     }
 }
 
+
+
+
+
+console.log("what the fricdge!")
+var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
+var stompClient = Stomp.over(socket);
+
+stompClient.connect({}, onConnected, onError);
+
+function onConnected() {
+    stompClient.subscribe('/topic/public', onMessageReceived);
+
+    // Tell your username to the server
+    stompClient.send("/app/chat.addUser",
+        {},
+        JSON.stringify({sender: username, type: 'JOIN'})
+    )
+
+    connectingElement.classList.add('hidden');
+}
+
+
+function onError(error) {
+    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+    connectingElement.style.color = 'red';
+}
+
+
+function sendMessage(message) {
+    if(message && stompClient) {
+        var chatMessage = {
+            sender: username,
+            content: message,
+            type: 'CHAT'
+        };
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+    }
+}
+
+function onMessageReceived(payload){
+    console.log(payload);
+}
 
 function changeBG() {
     document.getElementById('bg').src = '{{site.baseurl}}/images/stackoverflow.png'
@@ -228,8 +273,6 @@ function tempAddSong(input) {
     const URI = input.slice(index + 6, index + 28)
     addSong(URI)
 }
-
-
 
 function setSong() {
     document.getElementsByClassName('background')[0].style.backgroundImage.src = playlist[0][cover]

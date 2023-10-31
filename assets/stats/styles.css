@@ -24,7 +24,7 @@ div {
 
 .input-group{
     margin: auto;
-    margin-top: 30px;
+    margin-top: auto;
     width: 80%;
 }
 
@@ -36,6 +36,21 @@ div {
     font-size: 16px;
     margin-bottom: 30px;
     text-align: center;
+}
+
+.input-group input[type="submit"] {
+    background-color: #924bee;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.input-group input[type="submit"]:hover {
+    background-color: #df7bda;
 }
 
 body {

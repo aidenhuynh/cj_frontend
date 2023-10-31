@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/classroom/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="{{ site.baseurl }}/assets/classroom/script.js"></script>
 
 <div class="main">
