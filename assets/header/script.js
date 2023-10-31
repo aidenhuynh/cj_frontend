@@ -49,6 +49,7 @@ function updateHeaderSignUp() {
   headerRight.innerHTML = `
       <a href="/">Home</a>
       <a href="/stats/">Statistics</a>
+      <a href="/search">Search</a>
       <a href="/About">About</a>
       <a href="/sign_in">Sign Up</a>
   `;
