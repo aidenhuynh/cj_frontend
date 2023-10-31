@@ -34,13 +34,9 @@ class Track {
 
         // Get list of artists and set object artist to concatenation with commas
         const artists = songData.artists;
-        this.artist = artists.map(artist => artists.name).join(", ")
+        this.artist = artists.map(artist => artist.name).join(", ")
     }
 }
-
-
-
-
 
 console.log("what the fricdge!")
 var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
@@ -225,16 +221,11 @@ async function addSong(URI) {
     // Add to local queue
     playlist.push(temp)
 
-    console.log("prerun")
-
     // Add to actual spotify queue
     await spotifyAPI("me/player/queue?uri=spotify%3Atrack%3A" + URI, "POST")
 
-    console.log("preupdate")
-
     // Update visible queue
     updateQueue()
-    console.log("postupdate")
 }
 
 function removePlaylistDiv(index) {
@@ -256,10 +247,6 @@ function tempAddSong(input) {
     addSong(URI)
 }
 
-function setSong() {
-    document.getElementsByClassName('background')[0].style.backgroundImage.src = playlist[0][cover]
-}
-
 function setLength(length) {
     const progressBar = document.getElementById("progress-bar")
     const index = length.indexOf(":")
@@ -269,6 +256,12 @@ function setLength(length) {
     document.getElementById('length').innerHTML = length
 
     progressBar.dispatchEvent(new Event('input'))
+}
+
+function setSong(index) {
+    removePlaylistDiv(index)
+
+    
 }
 
 function setVolume(percent) {
@@ -328,24 +321,15 @@ function loop() {
 }
 
 function skip() {
-    if (playlist.length == 0) {
-        return
+    if (playlist.length != 0) {
+        removePlaylistDiv(0)
     }
 
     spotifyAPI("me/player/next", "POST")
-
-    if (playing == false){
-        spotifyAPI("me/player/pause", "PUT")
-    }
-
-    removePlaylistDiv(0)
 }
 
 function back() {
     spotifyAPI("me/player/previous", "POST")
-    if (playing == false){
-        spotifyAPI("me/player/pause", "PUT")
-    }
 }
 
 function mute() {
@@ -475,8 +459,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-// const redirectUri = 'http://127.0.0.1:4100/classroom';
-const redirectUri = 'https://classroomjukebox.com/classroom';
+const redirectUri = 'http://127.0.0.1:4100/classroom';
+// const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
 let body = new URLSearchParams({
@@ -548,7 +532,7 @@ async function spotifyAPI(url, method) {
 
         const contentType = response.headers.get('content-type')
 
-        if (contentType.includes('application/json')) {
+        if (contentType && contentType.includes('application/json')) {
             return response.json()
         }
 
