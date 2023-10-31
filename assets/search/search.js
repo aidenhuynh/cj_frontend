@@ -1,46 +1,33 @@
-// import logo from '/favicon.ico';
-// import './style/scss';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap'
-// import { useState, useEffect } from 'react';
+var username = "tester"
+var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
+var stompClient = Stomp.over(socket);
 
-// function App() {
-//     const [ searchInput, setSearchInput ] = useState("");
+stompClient.connect({}, onConnected, onError);
 
-//     return {
-//         <div className="App">
-//             <Container>
-//                 <InputGroup className="mb-3" size="lg">
-//                     <FormControl
-//                         placeholder="Search for Artist"
-//                         type="input"
-//                         onKeyPress={event => {
-//                             if (event.key == "Enter") {
-//                                 console.log("Pressed Enter");
-//                             }
-//                         }}
-//                         onChange={event => setSearchInput(event.target.value)}
-//                     />
-//                     <Button onClick={() => {console.log("Clicked Button")}}>
-//                         Search
-//                     </Button>
-//                 </InputGroup>
-//             </Container>
-//             <Container>
-//                 <Row className="mx-2 row row-cols-4">
-//                     <Card>
-//                         <Card.Img src="#" />
-//                         <Card.Body>
-//                             <Card.Title>Album Name Here</Card.Title>
-//                         </Card.Body>
-//                     </Card>
-//                 </Row>
-//             </Container>
-//         </div>
-//     };
-// }
+function onConnected() {
+    // Tell your username to the server
+    stompClient.send("/app/chat.addUser",
+        {},
+        JSON.stringify({sender: username, type: 'JOIN'})
+    )
 
-// export default App;
+}
+
+function onError(error) {
+    console.log(error)
+}
+
+function sendMessage(message) {
+    if(message && stompClient) {
+        var chatMessage = {
+            sender: username,
+            content: message,
+            type: 'CHAT'
+        };
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+    }
+}
+
 
 document.getElementById("search").onclick = function(){fetchData()}
 
@@ -96,6 +83,47 @@ function fetchData() {
     .then(data => {
       // Handle the data here, e.g., display the search results
       console.log(data);
+      resultContainer.innerHTML = ""
+        for (const row of data.tracks.items) {
+          console.log(row);
+
+          const tr = document.createElement("tr");
+
+          const artist = document.createElement("td");
+          const track = document.createElement("td");
+          const image = document.createElement("td");
+          const preview = document.createElement("td");
+          const playSong = document.createElement("td");
+
+          const playButton = document.createElement("button")
+          playButton.innerHTML = "Request Your Song!"
+          playButton.onclick = function() {sendMessage(row.uri.slice(14))}
+          playSong.appendChild(playButton);
+
+          artist.innerHTML = row.artists[0].name;
+          track.innerHTML = row.name; 
+          const img = document.createElement("img");
+          img.src = row.album.images[0].url;
+          img.style.height = "10em"
+          img.style.width = "auto"
+          image.appendChild(img);
+
+          const audio = document.createElement("audio");
+          audio.controls = true;
+          const source = document.createElement("source");
+          source.src = row.preview_url;
+          source.type = "audio/mp4";
+          audio.appendChild(source);
+          preview.appendChild(audio);
+
+          tr.appendChild(artist);
+          tr.appendChild(track);
+          tr.appendChild(image);
+          tr.appendChild(preview);
+          tr.appendChild(playSong);
+
+          resultContainer.appendChild(tr);
+        }
     })
     .catch(error => {
       console.error('Error:', error);

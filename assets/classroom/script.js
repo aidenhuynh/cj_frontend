@@ -39,6 +39,11 @@ class Track {
 }
 
 console.log("what the fricdge!")
+
+
+
+
+var username = "tester"
 var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
 var stompClient = Stomp.over(socket);
 
@@ -53,13 +58,11 @@ function onConnected() {
         JSON.stringify({sender: username, type: 'JOIN'})
     )
 
-    connectingElement.classList.add('hidden');
 }
 
 
 function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-    connectingElement.style.color = 'red';
+    console.log(error)
 }
 
 
@@ -75,7 +78,7 @@ function sendMessage(message) {
 }
 
 function onMessageReceived(payload){
-    console.log(payload);
+    addSong(JSON.parse(payload.body).content)
 }
 
 function changeBG() {
@@ -459,8 +462,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-const redirectUri = 'http://127.0.0.1:4100/classroom';
-// const redirectUri = 'https://classroomjukebox.com/classroom';
+// const redirectUri = 'http://127.0.0.1:4100/classroom';
+const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
 let body = new URLSearchParams({
