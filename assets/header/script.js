@@ -54,7 +54,7 @@ function updateHeaderSignUp() {
   `;
 }
 
-<script>
+
 const resultContainer = document.getElementById("result");
 
 function fetchData() {
@@ -132,7 +132,7 @@ function fetchData() {
       resultContainer.appendChild(tr);
     });
 }
-</script>
+
 
 
 function signOut() {
