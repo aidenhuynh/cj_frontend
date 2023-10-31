@@ -42,6 +42,37 @@
 
 // export default App;
 
+var username = "tester"
+var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
+var stompClient = Stomp.over(socket);
+
+stompClient.connect({}, onConnected, onError);
+
+function onConnected() {
+    // Tell your username to the server
+    stompClient.send("/app/chat.addUser",
+        {},
+        JSON.stringify({sender: username, type: 'JOIN'})
+    )
+
+}
+
+function onError(error) {
+    console.log(error)
+}
+
+function sendMessage(message) {
+    if(message && stompClient) {
+        var chatMessage = {
+            sender: username,
+            content: message,
+            type: 'CHAT'
+        };
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+    }
+}
+
+
 document.getElementById("search").onclick = function(){fetchData()}
 
 var client_id = 'a76d4532c6e14dd7bd7393e3fccc1185';
@@ -96,6 +127,44 @@ function fetchData() {
     .then(data => {
       // Handle the data here, e.g., display the search results
       console.log(data);
+        for (const row of data.tracks.items) {
+          console.log(row);
+
+          const tr = document.createElement("tr");
+
+          const artist = document.createElement("td");
+          const track = document.createElement("td");
+          const image = document.createElement("td");
+          const preview = document.createElement("td");
+          const playSong = document.createElement("td");
+
+          const playButton = document.createElement("button")
+          playButton.innerHTML = "Request Your Song!"
+          playButton.onclick = function() {sendMessage(row.uri.slice(14))}
+          playSong.appendChild(playButton);
+
+          artist.innerHTML = row.artists[0].name;
+          track.innerHTML = row.name; 
+          const img = document.createElement("img");
+          img.src = row.artworkUrl100;
+          image.appendChild(img);
+
+          const audio = document.createElement("audio");
+          audio.controls = true;
+          const source = document.createElement("source");
+          source.src = row.preview_url;
+          source.type = "audio/mp4";
+          audio.appendChild(source);
+          preview.appendChild(audio);
+
+          tr.appendChild(artist);
+          tr.appendChild(track);
+          tr.appendChild(image);
+          tr.appendChild(preview);
+          tr.appendChild(playSong);
+
+          resultContainer.appendChild(tr);
+        }
     })
     .catch(error => {
       console.error('Error:', error);

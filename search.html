@@ -1,6 +1,13 @@
+---
+layout: default
+search_exclude: true
+---
+
 <div>
     <input type="text" id="filterInput" placeholder="Enter">
     <button id="search">Search</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/assets/search/search.js" type="module">
     </script>
   </div>
@@ -12,6 +19,7 @@
         <th>Track</th>
         <th>Images</th>
         <th>Preview</th>
+        <th>Play Song</th>
       </tr>
     </thead>
     <tbody id="result">
