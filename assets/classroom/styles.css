@@ -9,19 +9,120 @@ div.main {
     font-family: "Trebuchet MS";
     font-weight: normal;
     letter-spacing: 0;
+    position: relative;
+    overflow: hidden
 }
 
 div.player {
     display: flex;
     flex-direction: column;
     flex: 65;
+    position: relative;
+    overflow: hidden;
 }
 
-div.songMetaData {
+div .player .songMetaData {
     display: flex;
     flex: 5;
+    /* background-color: black; */
+    flex-direction: row;
+    overflow: hidden
+}
+
+div .player .songMetaData::before {
+    content: "";
+    background-image: var(--background-image);
+    filter: blur(50px);
     background-color: black;
-    background-image: none;
+    background-size: 150%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transform: scale(1.5)
+}
+
+div.songMetaData .songText {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    height: 15em;
+    margin-top: 4em;
+    margin-bottom: auto;
+    margin-left: 3em;
+}
+
+div.songMetaData .songText .status {
+    font-weight: normal;
+    font-size: 2.5em;
+    margin-bottom: .5em;
+    flex: 1
+}
+
+div.songMetaData .songText .info {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+    flex: 3
+}
+
+div.songMetaData .songText .info h1 {
+    font-weight: normal;
+    font-size: 2em;
+    margin: 0;
+    margin-bottom: .5em;
+    margin-left: 15px;
+    width: 80%
+}
+
+div.songMetaData .songText .info h2 {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 1.5em;
+    margin: 0;
+    margin-left: 15px;
+    width: 80%
+}
+
+div.songMetaData .songText .sender {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+div.songMetaData .songText .sender h1 {
+    font-weight: normal;
+    font-size: 1em;
+    margin: 0;
+    margin-left: 15px;
+    width: 80%;
+}
+
+div.songMetaData .songText .sender h2 {
+    font-weight: normal;
+    font-style: italic;
+    font-size: .8em;
+    margin: 0;
+    margin-left: 15px;
+    width: 80%;
+}
+
+div.songMetaData .albumCover {
+    flex: 1;
+    margin: auto;
+    text-align: right;
+}
+
+div.songMetaData .albumCover img {
+    width: 15em;
+    height: auto;
+    margin-bottom: 1em;
+    margin-right: 3em;
+    box-shadow: 1em 1em rgb(0, 0, 0, .6);
 }
 
 div.mediaControls {
