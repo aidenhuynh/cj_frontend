@@ -146,7 +146,7 @@ function fetchData() {
           artist.innerHTML = row.artists[0].name;
           track.innerHTML = row.name; 
           const img = document.createElement("img");
-          img.src = row.artworkUrl100;
+          img.src = row.album.images[0].url;
           image.appendChild(img);
 
           const audio = document.createElement("audio");
