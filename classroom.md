@@ -17,8 +17,8 @@
                     <h2 id="queue-name">Sample Name</h2>
                 </div>
         </div>
-        <div class="albumCover" id="album-cover">
-            <img src="https://cdns-images.dzcdn.net/images/cover/6bed681d3fd25550ef733dfbcf3cd67e/350x350.jpg">
+        <div class="albumCover">
+            <img id="album-cover" src="https://cdns-images.dzcdn.net/images/cover/6bed681d3fd25550ef733dfbcf3cd67e/350x350.jpg">
         </div>
         </div>
         <div class="mediaControls">
