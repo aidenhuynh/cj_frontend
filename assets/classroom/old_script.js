@@ -1,185 +1,60 @@
-'use strict';
-
 const url = "images/classroom/"
 var playing = false
 var looping = false
 var shuffling = false
 var muted = false
 var savedVol = 0
-var playlist = []
+var songData = {}
 
-class Track {
-    // Method to set the data for initial run, as we already fetched it
-    setData(data) {
-        this.songData = data
-        this.setInfo()
+var playlist = [
+    {
+        title: "Sneaky Snitch",
+        artist: "Kevin MacLeod",
+        cover: "https://i.scdn.co/image/ab67616d0000b273ad5ff10a04a737d3ea8ae0f7",
+    },
+    {
+        title: "Cipher",
+        artist: "Kevin MacLeod",
+        cover: "https://cdns-images.dzcdn.net/images/cover/6bed681d3fd25550ef733dfbcf3cd67e/350x350.jpg",
+    },
+    {
+        title: "Fluffing a Duck",
+        artist: "Kevin MacLeod",
+        cover: "https://i.scdn.co/image/ab67616d0000b27339441d79f068f2e65e55eedc",
+    },
+    {
+        title:"Carefree",
+        artist:"Kevin MacLeod",
+        cover:"https://i.scdn.co/image/ab67616d0000b2733581aa1ca8780d7ee6461551"
+    },
+    {
+        title:"Monkeys Spinning Monkeys",
+        artist:"Kevin Macleod",
+        cover:"https://i.scdn.co/image/ab67616d0000b2731f81d415360fd941332ff0f8"
+    },
+    {
+        title:"Really long name, with a space",
+        artist:"special characters at the end are removed!",
+        cover:"https://m.media-amazon.com/images/I/519yS6S9DAL.jpg"
+    },
+    {
+        title:"but, before the *break* is still safe",
+        artist:"Artist names are also shortened to fit properly",
+        cover:"https://m.media-amazon.com/images/I/519yS6S9DAL.jpg"
     }
-
-    // Method to get song data from API
-    async getData(URI) {
-        // Fetch song information from Spotify API
-        await spotifyAPI("tracks/" + URI, "GET").then(data => {
-            this.songData = data
-        })
-    }
-
-    // Set data from object
-    setInfo() {
-        const songData = this.songData
-
-        // set title and cover image url
-        this.title = songData["name"]
-        this.cover = songData["album"]["images"][0]["url"]
-        this.length = songData["duration_ms"]
-
-        // Get list of artists and define a variable for its length
-        const artists = songData["artists"]
-        const artistCount = artists.length
-
-        // If there is only one artist, set to object
-        if (artistCount == 1) {
-            this.artist = artists[0]["name"]
-        }
-    
-        // If there are multiple artists, separate by comma
-        else {
-            this.artist = ""
-
-            for (let i = 0; i < artistCount; i ++) {
-                this.artist += artists[i]["name"]
-    
-                if (i != artistCount - 1) {
-                    this.artist += ", "
-                }
-            }
-        }
-    }
-}
-
-
-
-
-username = "tester"
-console.log("what the fricdge!")
-var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
-var stompClient = Stomp.over(socket);
-
-stompClient.connect({}, onConnected, onError);
-
-function onConnected() {
-    stompClient.subscribe('/topic/public', onMessageReceived);
-
-    // Tell your username to the server
-    stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({sender: username, type: 'JOIN'})
-    )
-
-    connectingElement.classList.add('hidden');
-}
-
-
-function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-    connectingElement.style.color = 'red';
-}
-
-
-function sendMessage(message) {
-    if(message && stompClient) {
-        var chatMessage = {
-            sender: username,
-            content: message,
-            type: 'CHAT'
-        };
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-    }
-}
-
-function onMessageReceived(payload){
-    console.log(payload);
-}
+]
 
 function changeBG() {
     document.getElementById('bg').src = '{{site.baseurl}}/images/stackoverflow.png'
 }
 
-function createPlaylistDiv(track) {
-    // Get the playlist HTML to put new divs into
-    var playlistDiv = document.getElementsByClassName('playlist')[0]
-    
-    // Make a frame for the new div
-    var divComponents = {
-        "playlistItem":null,
-        "numDiv":null,
-        "coverDiv":null,
-        "songDiv":null,
-    }
-
-    // Make a list from the components
-    const keys = Object.keys(divComponents)
-
-    // Make a new div for each component
-    for (let i = 0; i < keys.length; i ++) {
-        var component = keys[i]
-
-        divComponents[component] = document.createElement("div")
-        divComponents[component].className = component
-    }
-
-    // Add a delete button
-    var deleteDiv = document.createElement("div")
-    deleteDiv.className = "delete"
-
-    // Define variables to be shortened if needed
-    var title = track.title
-    var artist = track.artist
-
-    // Get the length of the playlist to number the track in the playlist
-    const count = document.getElementsByClassName('playlistItem').length
-
-    // Add full title and artist when hovering over text
-    divComponents["songDiv"].title = title + " - " + artist
-
-    // Shorten title and artist
-    title = lengthCheck(title, 24)
-    artist = lengthCheck(artist, 32)
-
-    // Add data to appropriate div sections
-    divComponents["numDiv"].innerHTML = count + 1
-    divComponents["coverDiv"].innerHTML = "<img src='" + track.cover + "'>"
-    divComponents["songDiv"].innerHTML = "<h1>" + title + "</h1><h2>" + artist + "</h2>"
-    deleteDiv.innerHTML = "&#x2715"
-
-    // Append the new div to the playlist
-    playlistDiv.appendChild(divComponents["playlistItem"])
-
-    // Append all div components to the playlist item div
-    for (let i = 1; i < keys.length; i ++) {
-        divComponents["playlistItem"].appendChild(divComponents[keys[i]])
-    }
-
-    // Append delete button to div
-    divComponents["playlistItem"].appendChild(deleteDiv)
-
-    // Add delete functionality
-    deleteDiv.onclick = function() { removePlaylistDiv(count) }
-
-    // Remove from the playlist
-    playlist.slice(1)
-}
-
-// Function for checking the length strings and shortening them
 function lengthCheck(data, maxLength) {
-    // If isn't longer than the max defined length, don't run
     if (data.length <= maxLength) {
         return data
     }
 
-    // Cut off past the max length
     data = data.slice(0, maxLength)
 
-    // Make a list of characters to cut off because something ending in "...." or "-..." will look weird
     const characters = [
         " ", "/", ".", ",", "-",
         "|", "+", "=", ")", "(",
@@ -191,7 +66,6 @@ function lengthCheck(data, maxLength) {
 
     const loops = data.length - 1
 
-    // Cut off all special characters from the end
     for (let i = loops; i > 0; i --) {
         if (characters.includes(data[i])) {
             data = data.slice(0, i)
@@ -205,54 +79,60 @@ function lengthCheck(data, maxLength) {
     }
 }
 
-// Function to initialize new song objects and add to queue
-async function addSong(URI) {
-    // Initialize object
-    var temp = new Track()
+function createPlaylistDiv(index) {
+    var playlistDiv = document.getElementsByClassName('playlist')[0]
+    let item = playlist[index]
+    
+    var divComponents = {
+        "playlistItem":null,
+        "numDiv":null,
+        "coverDiv":null,
+        "songDiv":null,
+    }
 
-    await temp.getData(URI)
+    const keys = Object.keys(divComponents)
 
-    temp.setInfo()
+    for (let i = 0; i < keys.length; i ++) {
+        var component = keys[i]
 
-    // Add to local queue
-    playlist.push(temp)
+        divComponents[component] = document.createElement("div")
+        divComponents[component].className = component
+    }
 
-    console.log("prerun")
+    var deleteDiv = document.createElement("div")
+    deleteDiv.className = "delete"
 
-    // Add to actual spotify queue
-    await spotifyAPI("me/player/queue?uri=spotify%3Atrack%3A" + URI, "POST")
+    var title = item["title"]
+    var artist = item["artist"]
+    const count = document.getElementsByClassName('playlistItem').length
 
-    console.log("preupdate")
+    divComponents["songDiv"].title = title + " - " + artist
 
-    // Update visible queue
-    updateQueue()
-    console.log("postupdate")
+    title = lengthCheck(title, 24)
+    artist = lengthCheck(artist, 32)
+
+    divComponents["numDiv"].innerHTML = count + 1
+    divComponents["coverDiv"].innerHTML = "<img src='" + item["cover"] + "'>"
+    divComponents["songDiv"].innerHTML = "<h1>" + title + "</h1><h2>" + artist + "</h2>"
+    deleteDiv.innerHTML = "&#x2715"
+
+    playlistDiv.appendChild(divComponents["playlistItem"])
+
+    for (let i = 1; i < keys.length; i ++) {
+        divComponents["playlistItem"].appendChild(divComponents[keys[i]])
+    }
+
+    divComponents["playlistItem"].appendChild(deleteDiv)
+
+    deleteDiv.onclick = function() { removePlaylistDiv(count) }
+
+    playlist.slice(1)
 }
 
-// Initialize playlist
-async function updateQueue() {
-    await spotifyAPI("me/player/queue", "GET").then(data => {
-        playlist = []
-        document.getElementById('playlistDiv').innerHTML = null
-
-        const nowPlaying = data["currently_playing"]
-        const queue = data["queue"]
-
-        for (let track of queue) {
-            // Get URI
-            const URI = track["uri"].slice(14)
-            
-            // Initialize object
-            var temp = new Track()
-    
-            temp.setData(track)
-    
-            // Add to local queue
-            playlist.push(temp)
-    
-            createPlaylistDiv(temp)
-        }
-    })
+function createPlaylist() {
+    for (let i = 0; i < playlist.length; i ++) {
+        createPlaylistDiv(i)
+    }
 }
 
 function removePlaylistDiv(index) {
@@ -272,6 +152,41 @@ function tempAddSong(input) {
     const index = input.indexOf("track/")
     const URI = input.slice(index + 6, index + 28)
     addSong(URI)
+}
+
+async function addSong(URI) {
+    await spotifyAPI("tracks/" + URI, "GET")
+    const title = songData["name"]
+    const cover = songData["album"]["images"][0]["url"]
+    var artist = ""
+    console.log(songData)
+
+    const artists = songData["artists"]
+    const artistCount = artists.length
+
+    if (artistCount == 0) {
+        artist = artists[0]["name"]
+    }
+
+    else {
+        for (let i = 0; i < artistCount; i ++) {
+            artist += artists[i]["name"]
+
+            if (i != artistCount - 1) {
+                artist += ", "
+            }
+        }
+    }
+
+    playlist.push({
+        title:title,
+        artist:artist,
+        cover:cover,
+    })
+
+    createPlaylistDiv(playlist.length - 1)
+
+    spotifyAPI("me/player/queue?uri=spotify%3Atrack%3A" + URI, "POST")
 }
 
 function setSong() {
@@ -346,17 +261,10 @@ function loop() {
 }
 
 function skip() {
-    if (playlist.length == 0) {
-        return
-    }
-
     spotifyAPI("me/player/next", "POST")
-
     if (playing == false){
         spotifyAPI("me/player/pause", "PUT")
     }
-
-    removePlaylistDiv(0)
 }
 
 function back() {
@@ -392,7 +300,7 @@ function dynamicBars() {
         progressBar:document.getElementById('progress-bar')
     }
 
-    var volTemp = bars["volumeBar"].value
+    var temp = bars["volumeBar"].value
 
     const volumeIcon = document.getElementById('volume-icon')
 
@@ -423,11 +331,11 @@ function dynamicBars() {
                 const percent = value/barValue.max
 
                 // Change this value for the minimum change in volume bar for a request to be sent
-                let minDiff = 5
+                const minDiff = 5
 
-                if (Math.abs(value - volTemp) > minDiff) {
+                if (Math.abs(value - temp) > minDiff) {
                     setVolume(Math.round(value))
-                    volTemp = Math.round(value)
+                    temp = Math.round(value)
                 }
 
                 if (percent > 2/3) {
@@ -469,16 +377,8 @@ function dynamicBars() {
                 }
 
                 progress.innerHTML = currentMinutes + temp + currentSeconds
-            })
 
-            barValue.addEventListener('mouseup', function() {
-                const length = document.getElementById('length').innerHTML
-                const percent = barValue.value/barValue.max
-                const index = length.indexOf(":")
-                const totalSeconds = length.slice(0, index) * 60 + Number(length.slice(index + 1))
-                const currentTotalSeconds = Math.floor(percent * totalSeconds)
-                
-                seek(currentTotalSeconds * 1000)
+                seek(totalSeconds * 1000)
             })
         }
     }
@@ -493,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-const redirectUri = 'http://127.0.0.1:4100/classroom';
+const redirectUri = 'http://127.0.0.1:4000/classroom';
 // const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
@@ -550,25 +450,23 @@ async function playSong() {
 }
 
 async function spotifyAPI(url, method) {
-    var accessToken = localStorage.getItem('access_token')
-
-    try {
-        const response = await fetch('https://api.spotify.com/v1/' + url, {
-            method: method,
-            headers: {
-                Authorization: 'Bearer ' + accessToken
-            }
-        })
-
-        if (!response.ok) {
-            throw new Error('HTTP status ' + response.status)
+    var accessToken = localStorage.getItem('access_token');
+    await fetch('https://api.spotify.com/v1/' + url, {
+        method : method,
+        headers: {
+            Authorization: 'Bearer ' + accessToken
         }
-
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+        }
         return response.json()
-    } 
-    
-    catch (error) {
-        console.error('Error:', error)
-        throw error
-    }
+    })
+    .then(data => {
+        console.log(data)
+        songData = data
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
 }

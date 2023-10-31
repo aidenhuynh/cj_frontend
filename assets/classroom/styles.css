@@ -212,6 +212,8 @@ div.playlist .coverDiv {
 div.playlist .coverDiv img {
     vertical-align: middle;
     align-items: center;
+    width: 2.5em;
+    height: auto;
 }
 
 div.playlist .songDiv {
