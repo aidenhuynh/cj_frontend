@@ -32,27 +32,9 @@ class Track {
         this.cover = songData["album"]["images"][0]["url"]
         this.length = songData["duration_ms"]
 
-        // Get list of artists and define a variable for its length
-        const artists = songData["artists"]
-        const artistCount = artists.length
-
-        // If there is only one artist, set to object
-        if (artistCount == 1) {
-            this.artist = artists[0]["name"]
-        }
-    
-        // If there are multiple artists, separate by comma
-        else {
-            this.artist = ""
-
-            for (let i = 0; i < artistCount; i ++) {
-                this.artist += artists[i]["name"]
-    
-                if (i != artistCount - 1) {
-                    this.artist += ", "
-                }
-            }
-        }
+        // Get list of artists and set object artist to concatenation with commas
+        const artists = songData.artists;
+        this.artist = artists.map(artist => artists.name).join(", ")
     }
 }
 
@@ -205,30 +187,6 @@ function lengthCheck(data, maxLength) {
     }
 }
 
-// Function to initialize new song objects and add to queue
-async function addSong(URI) {
-    // Initialize object
-    var temp = new Track()
-
-    await temp.getData(URI)
-
-    temp.setInfo()
-
-    // Add to local queue
-    playlist.push(temp)
-
-    console.log("prerun")
-
-    // Add to actual spotify queue
-    await spotifyAPI("me/player/queue?uri=spotify%3Atrack%3A" + URI, "POST")
-
-    console.log("preupdate")
-
-    // Update visible queue
-    updateQueue()
-    console.log("postupdate")
-}
-
 // Initialize playlist
 async function updateQueue() {
     await spotifyAPI("me/player/queue", "GET").then(data => {
@@ -253,6 +211,30 @@ async function updateQueue() {
             createPlaylistDiv(temp)
         }
     })
+}
+
+// Function to initialize new song objects and add to queue
+async function addSong(URI) {
+    // Initialize object
+    var temp = new Track()
+
+    await temp.getData(URI)
+
+    temp.setInfo()
+
+    // Add to local queue
+    playlist.push(temp)
+
+    console.log("prerun")
+
+    // Add to actual spotify queue
+    await spotifyAPI("me/player/queue?uri=spotify%3Atrack%3A" + URI, "POST")
+
+    console.log("preupdate")
+
+    // Update visible queue
+    updateQueue()
+    console.log("postupdate")
 }
 
 function removePlaylistDiv(index) {
@@ -493,8 +475,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
-const redirectUri = 'http://127.0.0.1:4100/classroom';
-// const redirectUri = 'https://classroomjukebox.com/classroom';
+// const redirectUri = 'http://127.0.0.1:4100/classroom';
+const redirectUri = 'https://classroomjukebox.com/classroom';
 const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
 
 let body = new URLSearchParams({
@@ -564,7 +546,15 @@ async function spotifyAPI(url, method) {
             throw new Error('HTTP status ' + response.status)
         }
 
-        return response.json()
+        const contentType = response.headers.get('content-type')
+
+        if (contentType.includes('application/json')) {
+            return response.json()
+        }
+
+        else {
+            return null
+        }
     } 
     
     catch (error) {
