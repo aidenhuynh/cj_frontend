@@ -6,7 +6,10 @@ search_exclude: true
 <div>
   <div class="input-group">
     <input type="text" id="filterInput" placeholder="Enter">
-    <button id="search">Search</button>
+    <div class="button-elements">
+      <button id="search">Search</button>
+    </div>
+  </div>
     <link
       href="https://fonts.googleapis.com/css?family=Rock+Salt"
       rel="stylesheet"
@@ -16,16 +19,14 @@ search_exclude: true
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/assets/search/search.js" type="module">
     </script>
-  </div>
 </div>
-  
   <table>
     <thead>
       <tr>
         <div class="metadata">
           <th>Artist</th>
           <th>Track</th>
-          <th>Images</th>
+          <th>Album Cover</th>
           <th>Preview</th>
           <th>Play Song</th>
         </div>

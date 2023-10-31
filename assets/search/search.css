@@ -76,18 +76,22 @@ table {
 } */
 
 /* Code for the Search Input */
-/* .input-group{
+.input-group{
     margin: auto;
     margin-top: auto;
     width: 80%;
 }
-
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #df1111;
     border-radius: 25px;
-    font-size: 16px;
-    margin-bottom: 30px;
+    font-size: 20px;
+    margin-bottom: 10px;
     text-align: center;
-} */
+}
+.button-elements{
+    color: rgb(83, 30, 83);
+    border-radius: 0px;
+    size: 20px;
+}
