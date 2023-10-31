@@ -340,7 +340,7 @@ function loop() {
 
 function skip() {
     if (playlist.length != 0) {
-        removePlaylistDiv(0)
+        setSong(0)
     }
 
     spotifyAPI("me/player/next", "POST")
@@ -471,7 +471,7 @@ function dynamicBars() {
 document.addEventListener('DOMContentLoaded', function() {
     dynamicBars()
     setLength("4:00") 
-   
+    updateQueue()
 })
 
 let codeVerifier2 = localStorage.getItem('code_verifier');
