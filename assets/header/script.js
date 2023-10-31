@@ -21,18 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
   displayCookies(cookies);
 });
 
-function displayCookies(cookies) {
-  const cookieDisplay = document.getElementById('cookieDisplay');
-  if (cookieDisplay) {
-      const cookiesList = cookies.map(cookie => {
-          const [name, value] = cookie.split('=');
-          return `${name}: ${value}`;
-      });
-
-      cookieDisplay.innerHTML = cookiesList.join('<br>');
-  }
-}
-
 function updateHeader(email) {
   const headerRight = document.getElementById('headerRight');
   headerRight.innerHTML = `
@@ -49,6 +37,7 @@ function updateHeaderSignUp() {
   headerRight.innerHTML = `
       <a href="/">Home</a>
       <a href="/stats/">Statistics</a>
+      <a href="/search">Search</a>
       <a href="/About">About</a>
       <a href="/sign_in">Sign Up</a>
   `;

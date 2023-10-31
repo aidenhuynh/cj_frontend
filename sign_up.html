@@ -1,0 +1,32 @@
+---
+layout: default
+search_exclude: true
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{site.baseurl}}/assets/sign-in/styles.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <p>Have an account? <a href="{{site.baseurl}}/sign_in/">Login!</a></p>
+
+        <form id="signInForm">
+            <div class="input-group">
+                <input type="email" id="email" name="email" placeholder="Email" required><br><br>
+                
+                <input type="name" id="name" name="name" placeholder="Name" required><br><br>
+
+                <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+
+                <input type="submit" value="Sign In">
+            </div>
+        </form>
+    </div>
