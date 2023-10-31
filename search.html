@@ -6,6 +6,11 @@ search_exclude: true
 <div>
     <input type="text" id="filterInput" placeholder="Enter">
     <button id="search">Search</button>
+    <link
+      href="https://fonts.googleapis.com/css?family=Rock+Salt"
+      rel="stylesheet"
+      type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/search/search.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/assets/search/search.js" type="module">
@@ -15,11 +20,13 @@ search_exclude: true
   <table>
     <thead>
       <tr>
-        <th>Artist</th>
-        <th>Track</th>
-        <th>Images</th>
-        <th>Preview</th>
-        <th>Play Song</th>
+        <div class="metadata">
+          <th>Artist</th>
+          <th>Track</th>
+          <th>Images</th>
+          <th>Preview</th>
+          <th>Play Song</th>
+        </div>
       </tr>
     </thead>
     <tbody id="result">
