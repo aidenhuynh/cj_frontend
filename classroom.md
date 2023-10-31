@@ -6,8 +6,20 @@
 <div class="main">
     <div class="player">
         <div class="songMetaData" id="songMetaData">
-            <div class="background">
-            </div>
+            <div class="songText">
+                <div class="status" id="status-div">NOW PLAYING:</div>
+                <div class="info" id="info-div">
+                    <h1 id="song-name">Song name</h1>
+                    <h2 id="artist-name">Artist</h2>
+                </div>
+                <div class="sender" id="sender-div">
+                    <h1 id="queue-status">Queued by:</h1>
+                    <h2 id="queue-name">Sample Name</h2>
+                </div>
+        </div>
+        <div class="albumCover" id="album-cover">
+            <img src="https://cdns-images.dzcdn.net/images/cover/6bed681d3fd25550ef733dfbcf3cd67e/350x350.jpg">
+        </div>
         </div>
         <div class="mediaControls">
             <div class="buttons">
