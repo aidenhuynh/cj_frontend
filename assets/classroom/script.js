@@ -59,8 +59,7 @@ class Track {
 
 
 
-username = "tester"
-console.log("what the fricdge!")
+var username = "tester"
 var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
 var stompClient = Stomp.over(socket);
 
