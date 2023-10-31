@@ -264,7 +264,22 @@ function setLength(length) {
 function setSong(index) {
     removePlaylistDiv(index)
 
-    
+    const track = playlist[index]
+    const cover = track.cover
+    const artist = lengthCheck(track.artist, 10)
+    const title = lengthCheck(track.title, 18)
+
+    // Update background image
+    document.querySelector('.songMetaData').style.setProperty(`--background-image`, `url("${cover}")`)
+
+    // Update album cover
+    document.getElementById('album-cover').src = cover
+
+    // Update song name
+    document.getElementById('song-name').innerHTML = title
+
+    // Update artist name
+    document.getElementById('artist-name').innerHTML = artist
 }
 
 function setVolume(percent) {
