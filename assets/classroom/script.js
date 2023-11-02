@@ -252,11 +252,23 @@ function tempAddSong(input) {
 
 function setLength(length) {
     const progressBar = document.getElementById("progress-bar")
-    const index = length.indexOf(":")
-    progressBar.max = length.slice(0, index) * 60 + Number(length.slice(index + 1))
+    const lengthText = document.getElementById('length')
+    const totalSeconds = length/1000
+    const minutes = Math.floor(totalSeconds/60)
+    const seconds = totalSeconds % 60
+    progressBar.max = totalSeconds
     progressBar.value = 0
     document.getElementById('current').innerHTML = "0:00"
-    document.getElementById('length').innerHTML = length
+
+    if (minutes > 9) {
+        lengthText.innerHTML = minutes + ":"
+    }
+
+    else {
+        lengthText.innerHTML = "0" + minutes + ":"
+    }
+
+    lengthText.innerHTML += seconds
 
     progressBar.dispatchEvent(new Event('input'))
 }
@@ -340,7 +352,7 @@ function loop() {
 
 function skip() {
     if (playlist.length != 0) {
-        removePlaylistDiv(0)
+        setSong(0)
     }
 
     spotifyAPI("me/player/next", "POST")
@@ -470,8 +482,9 @@ function dynamicBars() {
 
 document.addEventListener('DOMContentLoaded', function() {
     dynamicBars()
-    setLength("4:00") 
-   
+    updateQueue()
+
+    setLength(playlist[0].length)
 })
 
 let codeVerifier2 = localStorage.getItem('code_verifier');
