@@ -36,6 +36,13 @@ class Track {
         const artists = songData.artists;
         this.artist = artists.map(artist => artist.name).join(", ")
     }
+
+    // Get information from the current song
+    async getCurrent() {
+        await spotifyAPI("me/player/currently-playing/", "GET").then(data => {
+            this.songData = data.item
+        })
+    }
 }
 
 console.log("what the fricdge!")
@@ -231,6 +238,29 @@ async function addSong(URI) {
     updateQueue()
 }
 
+async function initialize() {
+    dynamicBars()
+    updateQueue()
+
+    // Initialize now playing object
+    var temp = new Track()
+
+    await temp.getCurrent()
+
+    temp.setInfo()
+
+    if (temp.songData == null) {
+        return
+    }
+
+    // Add to local queue
+    playlist.push(temp)
+
+    setSong(0)
+
+    setTimeout(updateTime(), 1000)
+}
+
 function removePlaylistDiv(index) {
     let items = document.getElementsByClassName('playlistItem')
     
@@ -255,17 +285,15 @@ function setLength(length) {
     const lengthText = document.getElementById('length')
     const totalSeconds = length/1000
     const minutes = Math.floor(totalSeconds/60)
-    const seconds = totalSeconds % 60
+    const seconds = Math.floor(totalSeconds % 60)
     progressBar.max = totalSeconds
     progressBar.value = 0
     document.getElementById('current').innerHTML = "0:00"
+    
+    lengthText.innerHTML = minutes + ":"
 
-    if (minutes > 9) {
-        lengthText.innerHTML = minutes + ":"
-    }
-
-    else {
-        lengthText.innerHTML = "0" + minutes + ":"
+    if (seconds < 10) {
+        lengthText.innerHTML += "0"
     }
 
     lengthText.innerHTML += seconds
@@ -274,7 +302,10 @@ function setLength(length) {
 }
 
 function setSong(index) {
-    removePlaylistDiv(index)
+    try {
+        removePlaylistDiv(index)
+    }
+    catch {}
 
     const track = playlist[index]
     const cover = track.cover
@@ -292,6 +323,9 @@ function setSong(index) {
 
     // Update artist name
     document.getElementById('artist-name').innerHTML = artist
+
+    // Update length
+    setLength(playlist[0].length)
 }
 
 function setVolume(percent) {
@@ -351,6 +385,11 @@ function loop() {
 }
 
 function skip() {
+    if (playing == false) {
+        document.getElementById('play').src = url + "pause.png"
+        playing = true
+    }
+
     if (playlist.length != 0) {
         setSong(0)
     }
@@ -455,7 +494,7 @@ function dynamicBars() {
                 const totalSeconds = length.slice(0, index) * 60 + Number(length.slice(index + 1))
 
                 const currentTotalSeconds = Math.floor(percent * totalSeconds)
-                const currentSeconds = currentTotalSeconds % 60
+                const currentSeconds = Math.floor(currentTotalSeconds % 60)
                 const currentMinutes = Math.floor(currentTotalSeconds/60)
         
                 var temp = ":"
@@ -481,10 +520,7 @@ function dynamicBars() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    dynamicBars()
-    updateQueue()
-
-    setLength(playlist[0].length)
+    initialize()
 })
 
 let codeVerifier2 = localStorage.getItem('code_verifier');
@@ -576,4 +612,38 @@ async function spotifyAPI(url, method) {
         console.error('Error:', error)
         throw error
     }
+}
+
+function setTime(ms) {
+    const progressBar = document.getElementById("progress-bar")
+    const lengthText = document.getElementById('current')
+
+    const totalSeconds = Math.floor(ms / 1000)
+    const minutes = Math.floor(totalSeconds / 60)
+    const seconds = Math.floor(totalSeconds % 60)
+
+    progressBar.value = totalSeconds
+    document.getElementById('current').innerHTML = "0:00"
+    
+    lengthText.innerHTML = minutes + ":"
+
+    if (seconds < 10) {
+        lengthText.innerHTML += "0"
+    }
+
+    lengthText.innerHTML += seconds
+
+    progressBar.dispatchEvent(new Event('input'))
+}
+
+async function updateTime() {
+    if (playing == false) {
+        return
+    }
+
+    console.log("run")
+
+    await spotifyAPI("me/player/currently-playing/", "GET").then(data => {
+        setTime(data.progress_ms + 1000)
+    })
 }
