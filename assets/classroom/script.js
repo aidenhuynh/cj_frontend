@@ -317,10 +317,10 @@ function setSong(index) {
     }
     catch {}
 
-    const track = playlist[index]
-    const cover = track.cover
-    const artist = lengthCheck(track.artist, 10)
-    const title = lengthCheck(track.title, 18)
+    var track = playlist[index]
+    var cover = track.cover
+    var artist = lengthCheck(track.artist, 10)
+    var title = lengthCheck(track.title, 18)
 
     // Update background image
     document.querySelector('.songMetaData').style.setProperty(`--background-image`, `url("${cover}")`)
