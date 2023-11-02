@@ -1,3 +1,4 @@
+<p>Connecting to Spotify API! If you don't get redirected click the button below.</p>
 <button type="button" id="login-button">Click Me!</button>
 
 <script type="module">
@@ -26,6 +27,7 @@
         return base64encode(digest);
     }
     
+
     const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
     // const redirectUri = 'http://127.0.0.1:4100/classroom';
     const redirectUri = 'https://classroomjukebox.com/classroom';
@@ -62,4 +64,6 @@
     }else{
         document.getElementById('login-button').addEventListener('click', function() { redirectToSpotifyAuthorizeEndpoint();}, false);
     }
+
+    redirectToSpotifyAuthorizeEndpoint();
 </script>
