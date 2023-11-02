@@ -26,7 +26,6 @@ function updateHeader(email) {
   headerRight.innerHTML = `
       <a href="/">Home</a>
       <a href="/stats/">Statistics</a>
-      <a href="/About">About</a>
       <span>${email}</span>
       <a href="javascript:signOut()">Sign Out</a>
   `;
@@ -38,7 +37,6 @@ function updateHeaderSignUp() {
       <a href="/">Home</a>
       <a href="/stats/">Statistics</a>
       <a href="/search">Search</a>
-      <a href="/About">About</a>
       <a href="/sign_in">Sign Up</a>
   `;
 }
