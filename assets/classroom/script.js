@@ -268,7 +268,7 @@ function removePlaylistDiv(index) {
     
     items[index].remove()
 
-    items = document.getElementsByClassName('playlistItem')
+    // items = document.getElementsByClassName('playlistItem')
 
     for (let i = 0; i < items.length; i ++) {
         items[i].children[0].innerHTML = i + 1
