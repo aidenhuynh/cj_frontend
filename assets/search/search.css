@@ -2,6 +2,9 @@
     height: 5em;
     width: auto;
 }
+body{
+    background-color: #191414;
+}
 table {
     table-layout: fixed;
     width: 100%;
@@ -84,14 +87,28 @@ table {
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #df1111;
     border-radius: 25px;
     font-size: 20px;
     margin-bottom: 10px;
     text-align: center;
 }
-.button-elements{
-    color: rgb(83, 30, 83);
-    border-radius: 0px;
-    size: 20px;
-}
+
+.button-elements {
+    
+  }
+
+.button-elements button {
+    margin: auto;
+    display: block;
+    background-color: #924bee;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 20px;
+}    
+.button-elements button:hover {
+    background-color: #df7bda;
+}   
