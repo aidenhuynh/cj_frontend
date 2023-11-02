@@ -7,6 +7,8 @@ var shuffling = false
 var muted = false
 var savedVol = 0
 var playlist = []
+var tick;
+var savedTime;
 
 class Track {
     // Method to set the data for initial run, as we already fetched it
@@ -258,7 +260,7 @@ async function initialize() {
 
     setSong(0)
 
-    setTimeout(updateTime(), 1000)
+    startTimer()
 }
 
 function removePlaylistDiv(index) {
@@ -278,6 +280,14 @@ function tempAddSong(input) {
     const index = input.indexOf("track/")
     const URI = input.slice(index + 6, index + 28)
     addSong(URI)
+}
+
+function startTimer() {
+    tick = setInterval(function() {updateTime()}, 1000)
+}
+
+function stopTimer() {
+    clearInterval(tick)
 }
 
 function setLength(length) {
@@ -332,14 +342,17 @@ function setVolume(percent) {
     spotifyAPI("me/player/volume?volume_percent=" + percent, "PUT")
 }
 
-function seek(ms) {
-    spotifyAPI("me/player/seek?position_ms=" + ms, "PUT")
+async function seek(ms) {
+    stopTimer()
+    await spotifyAPI("me/player/seek?position_ms=" + ms, "PUT")
+    startTimer()
 }
 
 function play() {
     const playIcon = document.getElementById('play')
 
     if (playing == false) {
+        setTime(savedTime)
         playIcon.src = url + "pause.png"
         spotifyAPI("me/player/play", "PUT")
         playing = true
@@ -615,6 +628,8 @@ async function spotifyAPI(url, method) {
 }
 
 function setTime(ms) {
+    savedTime = ms
+
     const progressBar = document.getElementById("progress-bar")
     const lengthText = document.getElementById('current')
 
@@ -644,6 +659,8 @@ async function updateTime() {
     console.log("run")
 
     await spotifyAPI("me/player/currently-playing/", "GET").then(data => {
-        setTime(data.progress_ms + 1000)
+        savedTime = data.progress_ms
+        setTime(savedTime)
+        
     })
 }
