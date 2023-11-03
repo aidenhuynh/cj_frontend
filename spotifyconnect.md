@@ -73,5 +73,5 @@
         document.getElementById('login-button').addEventListener('click', function() { redirectToSpotifyAuthorizeEndpoint();}, false);
     }
 
-    // redirectToSpotifyAuthorizeEndpoint();
+    redirectToSpotifyAuthorizeEndpoint();
 </script>
