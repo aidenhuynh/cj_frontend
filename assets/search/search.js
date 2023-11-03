@@ -95,6 +95,8 @@ function fetchData() {
           const preview = document.createElement("td");
           const playSong = document.createElement("td");
 
+          image.style.display = "flex";
+
           const playButton = document.createElement("button")
           playButton.innerHTML = "Request Your Song!"
           playButton.onclick = function() {sendMessage(row.uri.slice(14))}
