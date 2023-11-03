@@ -1,3 +1,19 @@
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Merienda");
+    p {
+        color: purple;
+        font-size: 35px;
+        font-family: 'Merienda', cursive;
+        text-align: center;
+    }
+    body {
+        background-color: #be83eb;
+    }
+    button {
+        color: #f520d5;
+    }
+</style>
+
 <p>Connecting to Spotify API! If you don't get redirected click the button below.</p>
 <button type="button" id="login-button">Click Me!</button>
 
