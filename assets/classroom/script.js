@@ -267,6 +267,7 @@ function removePlaylistDiv(index) {
     let items = document.getElementsByClassName('playlistItem')
     
     items[index].remove()
+    playlist[index].remove()
 
     // items = document.getElementsByClassName('playlistItem')
 
