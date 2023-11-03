@@ -1,31 +1,30 @@
-function signIn(event) {
-  event.preventDefault();
+document.getElementById('signInForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-  // Get email and password from the form
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
 
-  // authentication logic (validate email and password)
-  /*
-  if (email == (get email data) && password == (get password data)) {
-      const isAuthenticated = true;
-  }
-  else {
-      const isAuthenticated = false;
-  }
-  */
+    // Make a POST request to your authentication endpoint
+    fetch('https://cj-backend.stu.nighthawkcodingsociety.com/human/authenticate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Assuming the response contains a 'token' field
+        var token = data.token;
+        // Store the token in localStorage or a cookie for future use
+        // For simplicity, we're using localStorage here
+        console.log(token);
+        localStorage.setItem('token', token);
 
-  // For demo purposes, let's assume successful authentication
-  const isAuthenticated = true;
-
-  if (isAuthenticated) {
-      // Set a cookie with the user's email
-      document.cookie = `userEmail=${email}; expires=Sun, 1 Jan 2023 00:00:00 UTC; path=/`;
-
-      // Redirect to the home page
-      window.location.href = '/';
-  } else {
-      // Display an error message (you can customize this based on your authentication logic)
-      alert('Authentication failed. Please check your email and password.');
-  }
-}
+        alert('Sign in successful!');
+    })
+    .catch(error => console.error('Error:', error));
+});
