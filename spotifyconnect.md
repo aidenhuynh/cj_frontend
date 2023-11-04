@@ -1,13 +1,14 @@
 <style>
     @import url("https://fonts.googleapis.com/css?family=Merienda");
     p {
-        color: purple;
+        color: pink;
         font-size: 35px;
         font-family: 'Merienda', cursive;
         text-align: center;
     }
     body {
         background-color: #be83eb;
+        background-image: url('../../images/purple-bg.jpeg');
     }
     button {
         color: #f520d5;

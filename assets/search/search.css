@@ -5,6 +5,8 @@
 @import url("https://fonts.googleapis.com/css?family=Rubik%20Mono%20One:900&display=swap");
 body{
     background-color: #191414;
+    background-image: url('../../images/purple-bg.jpeg');
+    
 }
 table {
     table-layout: fixed;
@@ -12,8 +14,6 @@ table {
     border-collapse: collapse;
     /*border: 3px solid purple;*/
 } 
-    border: 3px solid purple;
-}
 .center {
     margin-left: auto;
     margin-right: auto;
