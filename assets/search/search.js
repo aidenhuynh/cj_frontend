@@ -96,6 +96,7 @@ function fetchData() {
           const playSong = document.createElement("td");
 
           image.style.display = "flex";
+          image.style.justifyContent = "center";
 
           const playButton = document.createElement("button")
           playButton.innerHTML = "Request Your Song!"
