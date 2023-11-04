@@ -2,15 +2,22 @@
     height: 5em;
     width: auto;
 }
+@import url("https://fonts.googleapis.com/css?family=Rubik%20Mono%20One:900&display=swap");
 body{
     background-color: #191414;
 }
 table {
     table-layout: fixed;
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
     /*border: 3px solid purple;*/
 } 
+    border: 3px solid purple;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
 thead th:nth-child(1) {
     width: 20%;
 } 
@@ -18,10 +25,10 @@ thead th:nth-child(2) {
     width: 20%;
 }
 thead th:nth-child(3) {
-    width: 15%;
+    width: 12.5%;
 }
 thead th:nth-child(4) {
-    width: 25%;
+    width: 27.5%;
 }
 thead th:nth-child(5) {
     width: 15%;
@@ -33,12 +40,13 @@ html {
     font-family: "helvetica neue", helvetica, arial, sans-serif;
 }
 thead th, tfoot th {
-    font-family: "Rock Salt", cursive;
+    font-family: 'Rubik Mono One', sans-serif; /* Apply the imported font */
 } 
 th {
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-align: center;
     max-height: 5%;
+    font-size: 20px;
 }
 td {
     letter-spacing: 1px;
@@ -74,15 +82,22 @@ tbody tr:nth-child(even) {
 table {
     background-color: #924bee;
 }
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
 /* .metadata {
     height: 0px;
 } */
 
 /* Code for the Search Input */
 .input-group{
+    display: flex;
+    justify-content: space-between;
+    flex: 2;
     margin: auto;
     margin-top: auto;
-    width: 50%;
+    width: 80%;
 }
 .input-group input {
     width: 100%;
@@ -92,6 +107,10 @@ table {
     margin-bottom: 10px;
     text-align: center;
 }
+
+.button-elements {
+    margin-left: 10px;
+  }
 
 .button-elements button {
     margin: auto;
