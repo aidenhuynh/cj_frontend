@@ -4,7 +4,7 @@ div.main {
     width: auto;
     height: auto;
     aspect-ratio: 16 / 9;
-    border: 1px black solid;
+    /* border: 1px black solid; */
     color: white;
     font-family: "Trebuchet MS";
     font-weight: normal;
@@ -271,7 +271,7 @@ div.playlist {
     display: flex;
     background-color: rgb(16, 18, 19);
     flex: 35;
-    border-left: solid 1px black;
+    /* border-left: solid 1px black; */
     overflow-x: hidden;
     overflow-y: auto;
     flex-direction: column;
