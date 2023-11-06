@@ -534,8 +534,8 @@ let codeVerifier2 = localStorage.getItem('code_verifier');
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
 var redirectUri = "";
-var siteUrl = "{{ site.url }}"
-if (siteUrl.includes("localhost")){
+var site_url = location.href
+if (site_url.includes("localhost") || site_url.includes("127.0.0.1")){
     redirectUri = 'http://127.0.0.1:4100/classroom';
 }
 else {

@@ -49,8 +49,9 @@
 
     const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
     var redirectUri = "";
-    var url = "{{ site.url }}"
-    if (url.includes("localhost")){
+    var site_url = location.href
+    
+    if (site_url.includes("localhost") || site_url.includes("127.0.0.1")){
         redirectUri = 'http://127.0.0.1:4100/classroom';
     }
     else {
