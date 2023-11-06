@@ -47,11 +47,6 @@ class Track {
     }
 }
 
-console.log("what the fricdge!")
-
-
-
-
 var username = "tester"
 var socket = new SockJS('https://cj-backend.stu.nighthawkcodingsociety.com/ws');
 var stompClient = Stomp.over(socket);
@@ -69,11 +64,9 @@ function onConnected() {
 
 }
 
-
 function onError(error) {
     console.log(error)
 }
-
 
 function sendMessage(message) {
     if(message && stompClient) {
@@ -319,8 +312,8 @@ function setSong(index) {
 
     const track = playlist[index]
     const cover = track.cover
-    const artist = lengthCheck(track.artist, 10)
-    const title = lengthCheck(track.title, 18)
+    const artist = lengthCheck(track.artist, 30)
+    const title = lengthCheck(track.title, 30)
 
     // Update background image
     document.querySelector('.songMetaData').style.setProperty(`--background-image`, `url("${cover}")`)

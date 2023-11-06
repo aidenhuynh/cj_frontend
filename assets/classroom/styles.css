@@ -66,7 +66,6 @@ div.songMetaData .songText .status {
 div.songMetaData .songText .info {
     display: flex;
     flex-direction: column;
-    line-height: 0;
     flex: 3
 }
 
@@ -76,7 +75,7 @@ div.songMetaData .songText .info h1 {
     margin: 0;
     margin-bottom: .5em;
     margin-left: 15px;
-    width: 80%
+    width: 9em
 }
 
 div.songMetaData .songText .info h2 {
@@ -85,7 +84,8 @@ div.songMetaData .songText .info h2 {
     font-size: 1.5em;
     margin: 0;
     margin-left: 15px;
-    width: 80%
+    width: 9em;
+    margin-top: -.5em
 }
 
 div.songMetaData .songText .sender {
