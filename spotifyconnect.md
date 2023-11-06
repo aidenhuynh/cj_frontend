@@ -1,4 +1,23 @@
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Merienda");
+    p {
+        color: pink;
+        font-size: 35px;
+        font-family: 'Merienda', cursive;
+        text-align: center;
+    }
+    body {
+        background-color: #be83eb;
+        background-image: url('../../images/purple-bg.jpeg');
+    }
+    button {
+        color: #f520d5;
+    }
+</style>
+
+<p>Connecting to Spotify API! If you don't get redirected click the button below.</p>
 <button type="button" id="login-button">Click Me!</button>
+
 
 <script type="module">
     function generateRandomString(length) {
@@ -25,10 +44,18 @@
     
         return base64encode(digest);
     }
-    
+
+
+
     const clientId = 'a76d4532c6e14dd7bd7393e3fccc1185';
-    // const redirectUri = 'http://127.0.0.1:4100/classroom';
-    const redirectUri = 'https://classroomjukebox.com/classroom';
+    var redirectUri = "";
+    var url = "{{ site.url }}"
+    if (url.includes("localhost")){
+        redirectUri = 'http://127.0.0.1:4100/classroom';
+    }
+    else {
+        redirectUri = 'https://classroomjukebox.com/classroom';
+    }
 
     
     let codeVerifier = generateRandomString(128);
@@ -62,4 +89,6 @@
     }else{
         document.getElementById('login-button').addEventListener('click', function() { redirectToSpotifyAuthorizeEndpoint();}, false);
     }
+
+    redirectToSpotifyAuthorizeEndpoint();
 </script>

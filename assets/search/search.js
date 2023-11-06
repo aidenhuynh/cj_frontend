@@ -95,6 +95,9 @@ function fetchData() {
           const preview = document.createElement("td");
           const playSong = document.createElement("td");
 
+          image.style.display = "flex";
+          image.style.justifyContent = "center";
+
           const playButton = document.createElement("button")
           playButton.innerHTML = "Request Your Song!"
           playButton.onclick = function() {sendMessage(row.uri.slice(14))}
@@ -128,63 +131,10 @@ function fetchData() {
     .catch(error => {
       console.error('Error:', error);
     });
-  
-
-//   fetch(url, headers)
-//     .then(response => {
-//       if (response.status !== 200) {
-//         const errorMsg = 'Database response error: ' + response.status;
-//         console.log(errorMsg);
-//         const tr = document.createElement("tr");
-//         const td = document.createElement("td");
-//         td.innerHTML = errorMsg;
-//         tr.appendChild(td);
-//         resultContainer.appendChild(tr);
-//         return;
-//       }
-
-//       response.json().then(data => {
-//         console.log(data);
-
-//       for (const row of data.results) {
-//           console.log(row);
-
-//           const tr = document.createElement("tr");
-
-//           const artist = document.createElement("td");
-//           const track = document.createElement("td");
-//           const image = document.createElement("td");
-//           const preview = document.createElement("td");
-
-//           artist.innerHTML = row.artistName;
-//           track.innerHTML = row.trackName; 
-//           const img = document.createElement("img");
-//           img.src = row.artworkUrl100;
-//           image.appendChild(img);
-
-//           const audio = document.createElement("audio");
-//           audio.controls = true;
-//           const source = document.createElement("source");
-//           source.src = row.previewUrl;
-//           source.type = "audio/mp4";
-//           audio.appendChild(source);
-//           preview.appendChild(audio);
-
-//           tr.appendChild(artist);
-//           tr.appendChild(track);
-//           tr.appendChild(image);
-//           tr.appendChild(preview);
-
-//           resultContainer.appendChild(tr);
-//         }
-//       })
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       const tr = document.createElement("tr");
-//       const td = document.createElement("td");
-//       td.innerHTML = err;
-//       tr.appendChild(td);
-//       resultContainer.appendChild(tr);
-//     });
 }
+
+document.addEventListener("keydown", function (key) {
+  if (key.code === "Enter") {
+      fetchData();
+  }
+});
