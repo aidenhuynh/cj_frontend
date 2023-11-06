@@ -8,10 +8,23 @@
 // Header
 
 .header {
-    overflow: hidden;
+    padding-right: 30px;
+    padding-left: 30px;
+    height: 8em;
     background-color: #212121;
+    
+}
+
+.header .inner {
+    max-width: calc(1000px - (30px * 2));
+    overflow: hidden;
     padding: 20px 10px;
     font-family: "Trebuchet MS";
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    height: 8em;
+    margin: auto
 }
   
 .header a {
@@ -23,6 +36,7 @@
     font-size: 18px; 
     line-height: 25px;
     border-radius: 4px;
+    margin: auto;
 }
 
 .header:hover a:hover {
@@ -35,6 +49,7 @@
     font-size: 25px;
     font-weight: bold;
     color:#924bee;
+    margin-left: 1em
 }
   
 .header a:hover {
@@ -48,7 +63,8 @@
 }
   
 .header-right {
-    float: right;
+    margin: auto;
+    margin-right: 1em;
 }
   
 body {
@@ -69,6 +85,11 @@ body {
     .header-right {
         float: none;
     }
+}
+
+.wrapper {
+    background-color: rgb(24,24,24);
+    margin-top: -60px
 }
 
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
