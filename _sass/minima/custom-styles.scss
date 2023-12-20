@@ -89,7 +89,8 @@ body {
 
 .wrapper {
     background-color: rgb(24,24,24);
-    margin-top: -60px
+    margin-top: -60px;
+    position: relative;
 }
 
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.

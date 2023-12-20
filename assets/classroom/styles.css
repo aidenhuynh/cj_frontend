@@ -10,7 +10,9 @@ div.main {
     font-weight: normal;
     letter-spacing: 0;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    padding-top:30px;
+    z-index: 1
 }
 
 div.player {
