@@ -46,8 +46,8 @@
     </div>
 </div>
 
-<button onclick="window.location = '{{site.baseurl}}/spotifyconnect'">login</button>
-<br>
+<!-- <button onclick="window.location = '{{site.baseurl}}/spotifyconnect'">login</button> -->
+<!-- <br> -->
 <!-- <button onclick="createPlaylist()">create playlist</button>
 <br>
 <input id="titleInput" placeholder="Enter song title">
@@ -62,6 +62,6 @@
 <br>
 <button onclick="setLength(document.getElementById('lengthInput').value)">change length</button>
 <br> -->
-<input id="linkInput" placeholder="Enter song link">
-<button onclick="tempAddSong(document.getElementById('linkInput').value)">add song</button>
+<!-- <input id="linkInput" placeholder="Enter song link">
+<button onclick="tempAddSong(document.getElementById('linkInput').value)">add song</button> -->
 
