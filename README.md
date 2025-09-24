@@ -2,8 +2,6 @@
 
 # Classroom Jukebox
 
-![Classroom Jukebox Logo](https://kkcbal.github.io/madeacopy/images/asher-concerned.jpg)
-
 Welcome to Classroom Jukebox, the ultimate music-sharing platform for teachers and students. Transform your classroom into a fun, collaborative, and engaging learning environment with music!
 
 ## Introduction
